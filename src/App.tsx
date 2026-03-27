@@ -1,120 +1,89 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { Routes, Route, useNavigate } from 'react-router-dom' // Importações para o roteamento
 import './App.css'
+import Home from './home' // Importando seu arquivo home.tsx
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  
+  const navigate = useNavigate()
+
+  const handleLogin = (e: { preventDefault: () => void }) => {
+    e.preventDefault()
+    console.log('Login solicitado:', { email, password })
+    
+    // Agora o botão "Entrar" leva para a rota /home
+    navigate('/home') 
+  }
+
+  // Criamos uma função que contém exatamente o SEU código original de visual
+  const LoginView = () => (
+    <div className={`app-container}`}>
+      
+
+      <main className="login-wrapper">
+        <section className="login-card">
+          <div className="login-header">
+            <div className="brand-logo"></div>
+            <h1>E-BOX</h1>
+            <br />
+            <h3>Login</h3>
+          </div>
+
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="input-group">
+              <input 
+                type="email" 
+                id="email" 
+                placeholder="E-mail" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required 
+              />
+            </div>
+
+            <div className="input-group">
+              <input 
+                type="password" 
+                id="password" 
+                placeholder="Senha" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required 
+              />
+            </div>
+
+            <div className="form-options">
+              <label className="remember-me">
+                <input type="checkbox" /> Lembrar de mim
+              </label>
+              <a href="#" className="forgot-password">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" className="btn-login">
+              Entrar
+            </button>
+          </form>
+
+          <div className="login-footer">
+            <span>Não tem uma conta?</span>
+            <br /><br />
+            <button className="btn-secondary">Criar conta no E-BOX</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  )
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <Routes>
+      {/* Quando o caminho for "/", mostra o seu Login */}
+      <Route path="/" element={<LoginView />} />
+      
+      {/* Quando o caminho for "/home", mostra o componente do arquivo Home.tsx */}
+      <Route path="/home" element={<Home />} />
+    </Routes>
   )
 }
 

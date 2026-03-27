@@ -1,0 +1,187 @@
+/* Reset Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Paleta E-BOX Clean */
+  --bg-app: #FFFFFF;           /* Fundo da página Totalmente Branco */
+  --card-bg: #F8FDFF;         /* Leve tom azulado para os cards não sumirem no fundo */
+  --border: #E1F0F7;          /* Borda suave azulada */
+  --text-main: #1A1C1E;       /* Texto principal (quase preto para leitura) */
+  --text-muted: #64748b;      /* Texto secundário */
+  --primary: #D4EFFF;         /* Azul destaque */
+  --primary-inner: #1F8500;   /* Verde E-BOX */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Container Principal */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-app); /* Agora Branco */
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* Navbar */
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: #FFFFFF; /* Navbar branca */
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--primary-inner); /* Logo em Verde */
+}
+
+/* Conteúdo do Dashboard */
+.dashboard-main {
+  flex: 1;
+  padding: 3rem 5%;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dashboard-header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+/* Cards de Estatísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.stat-card {
+  background-color: var(--card-bg); /* Azul claríssimo */
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--primary-inner); /* Verde E-BOX */
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  margin: 10px 0;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* Ações Rápidas */
+.action-card {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 2px dashed var(--border); /* Estilo "caixa" para combinar com E-BOX */
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* Botões */
+.btn-primary-ebox {
+  background-color: var(--primary); /* Azul D4EFFF */
+  color: var(--primary-inner);    /* Verde 1F8500 */
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary-ebox:hover {
+  filter: brightness(0.9);
+  box-shadow: 0 4px 10px rgba(31, 133, 0, 0.15);
+}
+
+.btn-secondary-ebox {
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary-ebox:hover {
+  background-color: var(--border);
+  color: var(--text-main);
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1.5px solid var(--primary-inner);
+  color: var(--primary-inner);
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: var(--primary-inner);
+  color: white;
+}
+
+/* Rodapé */
+.dashboard-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .dashboard-main {
+    padding: 2rem 1rem;
+  }
+  .btn-primary-ebox, .btn-secondary-ebox {
+    width: 100%;
+  }
+}
