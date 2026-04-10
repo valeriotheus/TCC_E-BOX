@@ -1,62 +1,85 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './home.css';
+import { useNavigate } from 'react-router-dom'
+import './home.css'
 
 function Home() {
-  const navigate = useNavigate();
-  const [userName] = useState('Administrador');
+  const navigate = useNavigate()
 
-    function gerarDadosAleatorios(): void {
-        console.log('Gerando dados aleatórios...');
-        // Add your implementation here
-    }
+  const codes = [
+    { code: '000001', user: 'José' },
+    { code: '025654', user: 'José' },
+    { code: '895566', user: 'José' }
+  ]
 
   return (
-    <div className="dashboard-wrapper">
-      <nav className="dashboard-nav">
-        <div className="nav-brand">
-          <span className="brand-name">E-BOX</span>
-        </div>
-        <div className="nav-user">
-          <span>Olá, <strong>{userName}</strong></span>
-          <br />
-          <br />
-          <button onClick={() => navigate('/')} className="btn-logout">Sair</button>
-        </div>
-      </nav>
+    <div className="home-container">
 
-      <main className="dashboard-main">
-        <header className="dashboard-header">
-          <h1>Códigos de Acesso</h1>
-        </header>
-        <br />
-    <section className="action-section">
-          <div className="action-card">
-            <h3>Ações Rápidas</h3>
-            <div className="button-group">
-              <button className="btn-primary-ebox" onClick={gerarDadosAleatorios}>
-                🔄 Atualizar Dados
-              </button>
-              <button className="btn-secondary-ebox">📊 Relatórios</button>
+      {/* TOPO */}
+      <div className="home-header">
+        <div className="logo">
+          <span className="e">E</span>-BOX
+        </div>
+
+        <div className="header-actions">
+
+          <button className="icon-btn">🕒</button>
+
+          {/* 👇 AQUI A CORREÇÃO */}
+          <button
+            className="icon-btn"
+            onClick={() => navigate('/userpage')}
+          >
+            👤
+          </button>
+
+        </div>
+      </div>
+
+      <br />
+
+      {/* TÍTULO */}
+      <h1 className="title">Códigos de Acesso</h1>
+
+      {/* LISTA */}
+      <div className="codes-list">
+        {codes.map((item, index) => (
+          <div key={index} className="code-card">
+            <div className="code-left">😴</div>
+
+            <div className="code-number">
+              {item.code}
+            </div>
+
+            <div className="code-user">
+              Criado por:<br />{item.user}
             </div>
           </div>
-        </section>
-        <br />
-        <section className="action-section">
-          <div className="action-card">
-            <h3>Camera</h3>
-            <div className="button-group">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
-          </div>
-        </section>
-      </main>
+        ))}
+      </div>
+
+      {/* SETA */}
+      <div className="arrow">⌄</div>
+
+      {/* CÂMERA */}
+      <div className="camera-card">
+        <div className="camera-header">
+          <span>Câmera ao Vivo</span>
+          <span>↗</span>
+        </div>
+
+        <div className="camera-box">
+          📷
+        </div>
+      </div>
+
+      <br />
+
+      {/* SAIR */}
+      <button className="logout" onClick={() => navigate('/')}>
+        Sair
+      </button>
+
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
