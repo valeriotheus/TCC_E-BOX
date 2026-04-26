@@ -22,5 +22,5 @@ Siga os passos abaixo para instalar o projeto em sua máquina:
 
 ## Documentação do Projeto
 
-- [[Link 1]((https://tcc-e-box.vercel.app/)) - Deploy do Projeto]
+- [Deploy do Projeto](https://tcc-e-box.vercel.app/)
 - [[Link 2] - Proposta do Projeto]
