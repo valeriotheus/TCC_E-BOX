@@ -1,5 +1,5 @@
 # E-BOX
-#### Organizadores: Matheus Soares Valério, Matheus Rowe Ferreira de Lima, Douglas de Souza Gomes, Mirella Mugnato, Guilherme da Costa Ramos.
+#### Organizadores: Matheus Soares Valério, Matheus Rowe Ferreira de Lima, Douglas de Souza Gomes, Mirella Mugnato e Guilherme da Costa Ramos.
 
 ### Instalação
 
