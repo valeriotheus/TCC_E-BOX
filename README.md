@@ -9,7 +9,7 @@ Siga os passos abaixo para instalar o projeto em sua máquina:
 
 2. Clone o repositório:
    ```bash
-   git clone https://github.com/Gustavolima07/proj_react
+   git clone https://github.com/valeriotheus/TCC_E-BOX.git
 3. Abra o terminal e acesse a pasta do projeto:
    ```bash
    cd vite-project
