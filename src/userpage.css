@@ -44,13 +44,37 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
+  position: relative;
+  z-index: 10;
 }
 
+/* BOTÃO VOLTAR */
 .back-btn {
-  background: transparent;
+  position: relative;
+  z-index: 11;
+
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
   border: none;
+
+  background: #1F8500;
+  color: white;
+
   font-size: 22px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.back-btn:hover {
+  background: #166300;
 }
 
 .title-top {
@@ -199,4 +223,3 @@
 .add-btn:hover {
   transform: translateY(-2px);
 }
-

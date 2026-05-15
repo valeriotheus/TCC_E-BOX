@@ -21,7 +21,12 @@ function Home() {
 
         <div className="header-actions">
 
-          <button className="icon-btn">🕒</button>
+          <button
+            className="icon-btn"
+            onClick={() => navigate('/historico')}
+          >
+            🕒
+          </button>
 
           {/* 👇 AQUI A CORREÇÃO */}
           <button

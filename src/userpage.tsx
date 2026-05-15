@@ -10,15 +10,16 @@ function User() {
       {/* HEADER */}
       <div className="user-header">
 
-        {/* 🔥 BOTÃO VOLTAR FUNCIONAL */}
+        {/* BOTÃO VOLTAR */}
         <button
+          type="button"
           className="back-btn"
-          onClick={() => navigate('/home')}
+          onClick={() => navigate(-1)}
         >
           ←
         </button>
 
-        <span className="title-top">Tela de Usuário</span>
+        <h2 className="title-top">Tela de Usuário</h2>
       </div>
 
       {/* PERFIL */}
@@ -45,22 +46,26 @@ function User() {
         <div className="user-row">
           <div className="row-left">
             <div className="mini-avatar">👤</div>
+
             <div>
               <strong>Maria</strong>
               <p>Convidada</p>
             </div>
           </div>
+
           <span className="lock">🔒</span>
         </div>
 
         <div className="user-row">
           <div className="row-left">
             <div className="mini-avatar">👤</div>
+
             <div>
               <strong>Enzo</strong>
               <p>Convidado</p>
             </div>
           </div>
+
           <span className="lock">🔒</span>
         </div>
       </div>
@@ -69,7 +74,10 @@ function User() {
       <div className="card">
         <h3>Adicionar Membro</h3>
 
-        <input className="input" placeholder="Nome:" />
+        <input
+          className="input"
+          placeholder="Nome:"
+        />
 
         <div className="radio-group">
           <label>
@@ -83,7 +91,9 @@ function User() {
           </label>
         </div>
 
-        <button className="add-btn">Adicionar</button>
+        <button className="add-btn">
+          Adicionar
+        </button>
       </div>
 
     </div>

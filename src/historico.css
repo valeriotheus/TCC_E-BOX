@@ -1,0 +1,217 @@
+/* RESET */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CONTAINER */
+.history-container{
+  min-height: 100vh;
+  padding: 20px;
+
+  position: relative;
+  overflow: hidden;
+
+  background: #edf1f4;
+  font-family: 'Inter', sans-serif;
+}
+
+/* CÍRCULOS */
+.bg-circle{
+  position: absolute;
+  background: #1F8500;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.top-left{
+  width: 230px;
+  height: 230px;
+  top: -120px;
+  left: -120px;
+}
+
+.top-right{
+  width: 150px;
+  height: 150px;
+  top: -60px;
+  right: -60px;
+}
+
+.bottom-right{
+  width: 220px;
+  height: 220px;
+  bottom: -120px;
+  right: -120px;
+}
+
+/* HEADER */
+.history-header{
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-btn{
+  border: none;
+  background: transparent;
+
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.header-title{
+  font-size: 11px;
+  color: #444;
+}
+
+/* TÍTULO */
+.main-title{
+  position: relative;
+  z-index: 2;
+
+  margin-top: 50px;
+  margin-bottom: 30px;
+
+  text-align: center;
+
+  color: #1F8500;
+
+  font-size: 32px;
+  font-weight: 800;
+}
+
+/* LISTA */
+.access-list{
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* CARD */
+.access-card{
+  background: #d8e8f2;
+
+  border-radius: 50px;
+
+  padding: 18px 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  box-shadow: 0 5px 12px rgba(0,0,0,0.18);
+}
+
+.clock-icon{
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+}
+
+.access-card h3{
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.access-card p{
+  color: #444;
+  font-size: 11px;
+}
+
+/* SETA */
+.arrow-down{
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  font-size: 31px;
+
+  margin: 20px 0;
+}
+
+/* FOTO CARD */
+.photo-card{
+  position: relative;
+  z-index: 2;
+
+  background: #d8e8f2;
+
+  border-radius: 35px;
+
+  padding: 25px;
+
+  box-shadow: 0 5px 12px rgba(0,0,0,0.18);
+}
+
+.photo-card h2{
+  text-align: center;
+  color: #1F8500;
+
+  margin-bottom: 20px;
+
+  font-size: 20px;
+}
+
+/* FOTO ROW */
+.photo-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 18px;
+}
+
+.photo-icon{
+  width: 55px;
+  height: 55px;
+
+  border-radius: 15px;
+
+  background: black;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+}
+
+.photo-info{
+  flex: 1;
+  margin-left: 15px;
+}
+
+.photo-info h4{
+  font-size: 13px;
+}
+
+.photo-info p{
+  font-size: 10px;
+  color: #444;
+}
+
+.expand-btn{
+  border: none;
+  background: transparent;
+
+  font-size: 15px;
+  cursor: pointer;
+}

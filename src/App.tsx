@@ -3,8 +3,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import './App.css'
 import Home from './home'
 import UserPage from './userpage'
+import Historico from './historico' // 🔥 ADICIONADO
 
-// 🔥 COMPONENTE FORA DO APP (ESSENCIAL)
 function LoginView({
   email,
   password,
@@ -73,7 +73,6 @@ function LoginView({
   )
 }
 
-// 🔥 APP PRINCIPAL
 function App() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -81,29 +80,32 @@ function App() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Login solicitado:', { email, password })
     navigate('/home')
   }
 
   return (
     <Routes>
-  <Route
-    path="/"
-    element={
-      <LoginView
-        email={email}
-        password={password}
-        setEmail={setEmail}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
+
+      <Route
+        path="/"
+        element={
+          <LoginView
+            email={email}
+            password={password}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+          />
+        }
       />
-    }
-  />
 
-  <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/userpage" element={<UserPage />} />
 
-  <Route path="/userpage" element={<UserPage />} />
-</Routes>
+      {/* 🔥 SÓ ISSO FOI ADICIONADO */}
+      <Route path="/historico" element={<Historico />} />
+
+    </Routes>
   )
 }
 
