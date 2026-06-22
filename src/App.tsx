@@ -3,20 +3,23 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import './App.css'
 import Home from './home'
 import UserPage from './userpage'
-import Historico from './historico' // 🔥 ADICIONADO
+import Historico from './historico'
+import Conta from './conta'
 
 function LoginView({
   email,
   password,
   setEmail,
   setPassword,
-  handleLogin
+  handleLogin,
+  goToConta
 }: {
   email: string
   password: string
   setEmail: (value: string) => void
   setPassword: (value: string) => void
   handleLogin: (e: React.FormEvent) => void
+  goToConta: () => void
 }) {
   return (
     <div className="app-container">
@@ -63,7 +66,10 @@ function LoginView({
         <div className="login-footer">
           <span>Não tem uma conta?</span>
           <br /><br />
-          <button className="btn-secondary">
+          <button
+            className="btn-secondary"
+            onClick={goToConta}
+          >
             Criar conta no E-BOX
           </button>
         </div>
@@ -95,15 +101,15 @@ function App() {
             setEmail={setEmail}
             setPassword={setPassword}
             handleLogin={handleLogin}
+            goToConta={() => navigate('/conta')}
           />
         }
       />
 
       <Route path="/home" element={<Home />} />
       <Route path="/userpage" element={<UserPage />} />
-
-      {/* 🔥 SÓ ISSO FOI ADICIONADO */}
       <Route path="/historico" element={<Historico />} />
+      <Route path="/conta" element={<Conta />} />
 
     </Routes>
   )
