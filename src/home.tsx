@@ -4,10 +4,10 @@ import './home.css'
 function Home() {
   const navigate = useNavigate()
 
-  const codes = [
-    { code: '000001', user: 'José' },
-    { code: '025654', user: 'José' },
-    { code: '895566', user: 'José' }
+  const senha = [
+    { senha: '000001', user: 'José' },
+    { senha: '025654', user: 'José' },
+    { senha: '895566', user: 'José' }
   ]
 
   return (
@@ -46,12 +46,12 @@ function Home() {
 
       {/* LISTA */}
       <div className="codes-list">
-        {codes.map((item, index) => (
+        {senha.map((item, index) => (
           <div key={index} className="code-card">
             <div className="code-left">😴</div>
 
             <div className="code-number">
-              {item.code}
+              {item.senha}
             </div>
 
             <div className="code-user">

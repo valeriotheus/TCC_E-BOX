@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from './firebase'
 import './App.css'
 import Home from './home'
 import UserPage from './userpage'
@@ -84,10 +86,24 @@ function App() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault()
+  
+  try {
+    // Valida o e-mail e senha diretamente no Firebase Auth
+    await signInWithEmailAndPassword(auth, email, password)
+    
+    // Limpa os campos do formulário
+    setEmail('')
+    setPassword('')
+    
+    // Redireciona para a home apenas se a validação der certo
     navigate('/home')
+  } catch (error) {
+    console.error("Erro na validação do login:", error)
+    alert("E-mail ou senha incorretos. Por favor, tente novamente.")
   }
+}
 
   return (
     <Routes>

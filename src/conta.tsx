@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth' // Importa o método do Firebase
+import { auth } from './firebase' // Importa a instância que você configurou acima
 import './App.css'
 
 function Conta() {
@@ -10,7 +12,8 @@ function Conta() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleRegister = (e: React.FormEvent) => {
+  // Transformamos em uma função assíncrona para lidar com a requisição
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
@@ -18,14 +21,22 @@ function Conta() {
       return
     }
 
-    alert('Conta criada com sucesso!')
-    navigate('/')
+    try {
+      // Chama o método do Firebase para registrar o usuário
+      await createUserWithEmailAndPassword(auth, email, password)
+      
+      alert('Conta criada com sucesso!')
+      navigate('/')
+    } catch (error: any) {
+      // Trata erros comuns, como e-mail já cadastrado ou senha fraca
+      alert('Erro ao criar conta: ' + error.message)
+    }
   }
 
   return (
     <div className="app-container">
+      {/* O restante do seu HTML permanece exatamente igual */}
       <section className="login-card">
-
         <div className="login-header">
           <h1>E-BOX</h1>
           <br />
@@ -33,7 +44,6 @@ function Conta() {
         </div>
 
         <form onSubmit={handleRegister} className="login-form">
-
           <div className="input-group">
             <label htmlFor="nome">Nome</label>
             <input
@@ -85,7 +95,6 @@ function Conta() {
           <button type="submit" className="btn-login">
             Criar Conta
           </button>
-
         </form>
 
         <div className="login-footer">
@@ -96,7 +105,6 @@ function Conta() {
             Voltar para Login
           </button>
         </div>
-
       </section>
     </div>
   )
