@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './home.css'
 
 function Home() {
   const navigate = useNavigate()
+
+  const [mostrarCamera, setMostrarCamera] = useState(false)
 
   const senha = [
     { senha: '000001', user: 'José' },
@@ -20,7 +23,6 @@ function Home() {
         </div>
 
         <div className="header-actions">
-
           <button
             className="icon-btn"
             onClick={() => navigate('/historico')}
@@ -28,14 +30,12 @@ function Home() {
             🕒
           </button>
 
-          {/* 👇 AQUI A CORREÇÃO */}
           <button
             className="icon-btn"
             onClick={() => navigate('/userpage')}
           >
             👤
           </button>
-
         </div>
       </div>
 
@@ -44,42 +44,75 @@ function Home() {
       {/* TÍTULO */}
       <h1 className="title">Códigos de Acesso</h1>
 
-      {/* LISTA */}
+      {/* LISTA DE CÓDIGOS */}
       <div className="codes-list">
         {senha.map((item, index) => (
           <div key={index} className="code-card">
-            <div className="code-left">😴</div>
+
+            <div className="code-left">
+              👁️
+            </div>
 
             <div className="code-number">
               {item.senha}
             </div>
 
             <div className="code-user">
-              Criado por:<br />{item.user}
+              Criado por:<br />
+              {item.user}
             </div>
+
           </div>
         ))}
       </div>
 
+      {/* BOTÃO CRIAR CÓDIGO */}
+      <button
+        className="create-code-btn"
+        onClick={() => navigate('/criar-codigo')}
+      >
+        + Criar Código de Acesso
+      </button>
+
       {/* SETA */}
       <div className="arrow">⌄</div>
 
-      {/* CÂMERA */}
+      {/* CARD DA CÂMERA */}
       <div className="camera-card">
+
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
-          <span>↗</span>
+          <span>📹</span>
         </div>
 
         <div className="camera-box">
-          📷
+
+          {!mostrarCamera ? (
+            <button
+              className="camera-btn"
+              onClick={() => setMostrarCamera(true)}
+            >
+              Mostrar Câmera
+            </button>
+          ) : (
+            <img
+              src="/camera.jpg"
+              alt="Câmera"
+              className="camera-image"
+            />
+          )}
+
         </div>
+
       </div>
 
       <br />
 
       {/* SAIR */}
-      <button className="logout" onClick={() => navigate('/')}>
+      <button
+        className="logout"
+        onClick={() => navigate('/')}
+      >
         Sair
       </button>
 
