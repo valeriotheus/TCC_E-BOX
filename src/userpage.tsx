@@ -70,29 +70,13 @@ function User() {
         </div>
       </div>
 
-      {/* ADICIONAR MEMBRO */}
+      {/* BOTÃO ADICIONAR USUÁRIO */}
       <div className="card">
-        <h3>Adicionar Membro</h3>
-
-        <input
-          className="input"
-          placeholder="Nome:"
-        />
-
-        <div className="radio-group">
-          <label>
-            <input type="radio" name="role" />
-            Administrador
-          </label>
-
-          <label>
-            <input type="radio" name="role" />
-            Convidado
-          </label>
-        </div>
-
-        <button className="add-btn">
-          Adicionar
+        <button
+          className="add-btn"
+          onClick={() => navigate('/conta')}
+        >
+          + Adicionar Usuário
         </button>
       </div>
 

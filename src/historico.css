@@ -78,10 +78,11 @@ body {
   border: none;
   border-radius: 50%;
 
-  background: rgba(255,255,255,.75);
-  backdrop-filter: blur(15px);
+  /* BOTÃO VERDE */
+  background: #1F8500;
+  color: #ffffff;
 
-  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+  box-shadow: 0 5px 15px rgba(31,133,0,.35);
 
   cursor: pointer;
   transition: .25s;
@@ -90,9 +91,10 @@ body {
 }
 
 .back-btn:hover {
-  background: #1F8500;
-  color: white;
-  transform: translateY(-2px);
+  background: #176600;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(31,133,0,.45);
 }
 
 .header-title {

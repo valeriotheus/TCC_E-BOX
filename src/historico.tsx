@@ -23,19 +23,6 @@ export default function Historico() {
     }
   ]
 
-  const photoList = [
-    {
-      id: 1,
-      date: '23/02 às 18:40',
-      code: '000001'
-    },
-    {
-      id: 2,
-      date: '22/02 às 17:30',
-      code: '000001'
-    }
-  ]
-
   return (
     <div className="history-container">
 
@@ -90,50 +77,6 @@ export default function Historico() {
         ))}
 
       </div>
-
-      {/* SETA */}
-      <div className="arrow-down">
-        ˅
       </div>
-
-      {/* HISTÓRICO DE FOTOS */}
-      <div className="photo-card">
-
-        <h2>
-          Histórico de Fotos
-        </h2>
-
-        {photoList.map((photo) => (
-          <div
-            className="photo-row"
-            key={photo.id}
-          >
-
-            <div className="photo-icon">
-              📷
-            </div>
-
-            <div className="photo-info">
-
-              <h4>
-                Tirado em: {photo.date}
-              </h4>
-
-              <p>
-                Acesso via código: {photo.code}
-              </p>
-
-            </div>
-
-            <button className="expand-btn">
-              ↗
-            </button>
-
-          </div>
-        ))}
-
-      </div>
-
-    </div>
   )
 }
