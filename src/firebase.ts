@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyClEVVuGVz9Jj-1s13HzeWdXxnnH9fpC0w",
@@ -15,6 +16,9 @@ const firebaseConfig = {
 
 // Inicializa o Firebase
 export const app = initializeApp(firebaseConfig);
+
+// Inicializa o Realtime Database
+export const db = getDatabase(app);
 
 // Inicializa o Analytics somente quando suportado
 export let analytics: ReturnType<typeof getAnalytics> | null = null;

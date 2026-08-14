@@ -126,7 +126,6 @@ function App() {
       <Route path="/userpage" element={<UserPage />} />
       <Route path="/historico" element={<Historico />} />
       <Route path="/conta" element={<Conta />} />
-
     </Routes>
   )
 }

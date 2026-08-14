@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ref, set } from 'firebase/database'
+import { db } from './firebase'
 import './home.css'
 
 function Home() {
@@ -8,10 +10,16 @@ function Home() {
   const [mostrarCamera, setMostrarCamera] = useState(false)
 
   const senha = [
-    { senha: '000001', user: 'José' },
-    { senha: '025654', user: 'José' },
-    { senha: '895566', user: 'José' }
+    { senha: '00001', user: 'José' },
+    { senha: '02568', user: 'José' },
+    { senha: '89558', user: 'José' }
   ]
+
+  // Envia os códigos de acesso para o Firebase assim que a página carrega
+  useEffect(() => {
+    const senhasRef = ref(db, '/Senhas')
+    set(senhasRef, senha)
+  }, [])
 
   return (
     <div className="home-container">
