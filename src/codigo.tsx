@@ -69,13 +69,6 @@ function Codigo() {
 
       <div className="create-header">
 
-        <button
-          className="back-btn"
-          onClick={() => navigate('/home')}
-        >
-          ←
-        </button>
-
         <div className="logo">
           <span className="e">E</span>-BOX
         </div>
