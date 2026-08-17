@@ -1,0 +1,583 @@
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #eef7fb;
+}
+
+/* ========================= */
+/* FUNDO */
+/* ========================= */
+
+.create-container {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 25px;
+
+  background: linear-gradient(
+    180deg,
+    #eef8ff 0%,
+    #ffffff 100%
+  );
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+/* ========================= */
+/* DECORAÇÕES */
+/* ========================= */
+
+.create-container::before,
+.create-container::after {
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.create-container::before {
+  top: -180px;
+  left: -180px;
+
+  background: radial-gradient(
+    circle,
+    rgba(31, 133, 0, 0.25),
+    transparent 70%
+  );
+}
+
+.create-container::after {
+  right: -180px;
+  bottom: -180px;
+
+  background: radial-gradient(
+    circle,
+    rgba(0, 140, 255, 0.15),
+    transparent 70%
+  );
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.create-header {
+  width: 100%;
+
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  position: relative;
+
+  z-index: 10;
+
+  flex-shrink: 0;
+}
+
+/* ========================= */
+/* LOGO */
+/* ========================= */
+
+.logo {
+  font-size: 32px;
+
+  font-weight: 900;
+
+  color: #111827;
+}
+
+.logo .e {
+  color: #1f8500;
+}
+
+/* ========================= */
+/* BOTÃO VOLTAR */
+/* ========================= */
+
+.back-btn {
+  width: 45px;
+  height: 45px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.08);
+
+  color: #334155;
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.back-btn:hover {
+  background: #1f8500;
+
+  color: white;
+
+  transform: translateX(-3px);
+}
+
+/* ========================= */
+/* ESPAÇO DO HEADER */
+/* ========================= */
+
+.header-space {
+  width: 45px;
+}
+
+/* ========================= */
+/* CARD CENTRAL */
+/* ========================= */
+
+.create-card {
+  width: 100%;
+
+  max-width: 500px;
+
+  padding: 30px;
+
+  border-radius: 25px;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.09);
+
+  position: relative;
+
+  z-index: 2;
+
+  /*
+    Centraliza o card verticalmente
+  */
+
+  margin-top: auto;
+
+  margin-bottom: auto;
+}
+
+/* ========================= */
+/* ÍCONE */
+/* ========================= */
+
+.form-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: rgba(31, 133, 0, 0.13);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 32px;
+}
+
+/* ========================= */
+/* TÍTULO DO CARD */
+/* ========================= */
+
+.create-card h2 {
+  text-align: center;
+
+  color: #1e293b;
+
+  font-size: 22px;
+
+  margin-bottom: 8px;
+}
+
+/* ========================= */
+/* DESCRIÇÃO */
+/* ========================= */
+
+.form-description {
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  margin-bottom: 28px;
+}
+
+/* ========================= */
+/* INPUTS DA PÁGINA DE CÓDIGO */
+/* ========================= */
+
+/*
+  IMPORTANTE:
+  Tudo abaixo está dentro de .create-container.
+  Assim não interfere nos inputs da página de Login.
+*/
+
+.create-container .input-group {
+  width: 100%;
+
+  margin-bottom: 20px;
+}
+
+.create-container .input-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #334155;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.create-container .input-group input {
+  width: 100%;
+
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 2px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #1e293b;
+
+  font-size: 17px;
+
+  outline: none;
+
+  transition: 0.25s;
+
+  /*
+    Impede qualquer espaçamento herdado
+    de outro CSS.
+  */
+  letter-spacing: normal;
+}
+
+.create-container .input-group input:focus {
+  border-color: #1f8500;
+
+  box-shadow:
+    0 0 0 4px rgba(31, 133, 0, 0.1);
+}
+
+.create-container .input-group input::placeholder {
+  color: #94a3b8;
+
+  letter-spacing: normal;
+}
+
+/* ========================= */
+/* CAMPO DO CÓDIGO */
+/* ========================= */
+
+/*
+  Somente o PRIMEIRO campo da página
+  de criação recebe o espaçamento.
+*/
+
+.create-container .input-group:first-of-type input {
+  text-align: center;
+
+  font-size: 25px;
+
+  font-weight: 800;
+
+  letter-spacing: 7px;
+}
+
+/* ========================= */
+/* AJUDA DO INPUT */
+/* ========================= */
+
+.create-container .input-help {
+  display: block;
+
+  margin-top: 7px;
+
+  text-align: center;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+/* ========================= */
+/* MENSAGEM */
+/* ========================= */
+
+.create-container .message {
+  width: 100%;
+
+  padding: 12px;
+
+  margin-bottom: 18px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* ========================= */
+/* SUCESSO */
+/* ========================= */
+
+.create-container .message.success {
+  background: #dcfce7;
+
+  color: #166534;
+}
+
+/* ========================= */
+/* ERRO */
+/* ========================= */
+
+.create-container .message.error {
+  background: #fee2e2;
+
+  color: #b91c1c;
+}
+
+/* ========================= */
+/* BOTÃO CRIAR */
+/* ========================= */
+
+.create-container .save-code-btn {
+  width: 100%;
+
+  height: 52px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #1f8500,
+    #38b000
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(31, 133, 0, 0.3);
+
+  transition: 0.25s;
+}
+
+.create-container .save-code-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(31, 133, 0, 0.35);
+}
+
+.create-container .save-code-btn:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+/* ========================= */
+/* CANCELAR */
+/* ========================= */
+
+.create-container .cancel-btn {
+  width: 100%;
+
+  height: 48px;
+
+  margin-top: 12px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.create-container .cancel-btn:hover {
+  background: #f1f5f9;
+
+  color: #334155;
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 600px) {
+
+  .create-container {
+    padding: 18px;
+
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  /* ========================= */
+  /* CARD NO CELULAR */
+  /* ========================= */
+
+  .create-card {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 24px 20px;
+
+    border-radius: 22px;
+
+    margin-top: auto;
+
+    margin-bottom: auto;
+  }
+
+  /* ========================= */
+  /* ÍCONE */
+  /* ========================= */
+
+  .form-icon {
+    width: 60px;
+    height: 60px;
+
+    font-size: 27px;
+  }
+
+  /* ========================= */
+  /* INPUT CÓDIGO */
+  /* ========================= */
+
+  .create-container .input-group:first-of-type input {
+    font-size: 22px;
+
+    letter-spacing: 5px;
+  }
+
+  /* ========================= */
+  /* BOTÕES */
+  /* ========================= */
+
+  .create-container .save-code-btn {
+    height: 50px;
+
+    font-size: 15px;
+  }
+
+  .create-container .cancel-btn {
+    height: 46px;
+
+    font-size: 14px;
+  }
+}
+
+/* ========================= */
+/* CELULARES BAIXOS */
+/* ========================= */
+
+@media (max-height: 700px) {
+
+  .create-container {
+    overflow-y: auto;
+  }
+
+  .create-card {
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+
+    padding: 20px;
+  }
+
+  .form-icon {
+    width: 55px;
+    height: 55px;
+
+    margin-bottom: 10px;
+  }
+
+  .form-description {
+    margin-bottom: 18px;
+  }
+
+  .create-container .input-group {
+    margin-bottom: 14px;
+  }
+}

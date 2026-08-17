@@ -1,225 +1,615 @@
+/* ========================= */
 /* RESET */
+/* ========================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* FUNDO */
-.user-container {
-  min-height: 100vh;
-  padding: 20px;
-
-  font-family: 'Inter', sans-serif;
-
-  background: linear-gradient(180deg, #f4fbff 0%, #ffffff 100%);
-  position: relative;
-  overflow: hidden;
+body {
+  font-family: "Inter", sans-serif;
+  background: #eef8ff;
 }
 
-/* DECORAÇÃO */
+/* ========================= */
+/* CONTAINER */
+/* ========================= */
+
+.user-container {
+  min-height: 100vh;
+
+  padding: 25px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    180deg,
+    #eef8ff 0%,
+    #ffffff 100%
+  );
+}
+
+/* ========================= */
+/* CÍRCULOS */
+/* ========================= */
+
 .user-container::before,
 .user-container::after {
   content: "";
+
   position: absolute;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #1F8500 0%, transparent 70%);
-  opacity: 0.15;
+
   border-radius: 50%;
+
+  z-index: 0;
+
+  pointer-events: none;
 }
 
 .user-container::before {
-  top: -120px;
-  left: -120px;
+  width: 350px;
+  height: 350px;
+
+  top: -180px;
+  left: -180px;
+
+  background: radial-gradient(
+    circle,
+    rgba(31, 133, 0, 0.25),
+    transparent 70%
+  );
 }
 
 .user-container::after {
-  bottom: -120px;
-  right: -120px;
+  width: 320px;
+  height: 320px;
+
+  right: -180px;
+  bottom: -180px;
+
+  background: radial-gradient(
+    circle,
+    rgba(0, 140, 255, 0.15),
+    transparent 70%
+  );
 }
 
+/* ========================= */
 /* HEADER */
+/* ========================= */
+
 .user-header {
+  width: 100%;
+
   display: flex;
+
   align-items: center;
-  gap: 10px;
+
+  gap: 15px;
 
   position: relative;
-  z-index: 10;
+
+  z-index: 2;
+
+  margin-bottom: 35px;
 }
 
+/* ========================= */
 /* BOTÃO VOLTAR */
-.back-btn {
-  position: relative;
-  z-index: 11;
+/* ========================= */
 
+.back-btn {
   width: 45px;
   height: 45px;
 
-  border-radius: 50%;
+  flex-shrink: 0;
+
   border: none;
 
-  background: #1F8500;
-  color: white;
+  border-radius: 50%;
 
-  font-size: 22px;
+  background: #1F8500;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 5px 15px rgba(31, 133, 0, 0.35);
+
   cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: 0.25s;
 
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-size: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 }
 
 .back-btn:hover {
-  background: #166300;
+  background: #176600;
+
+  color: #ffffff;
+
+  transform: translateY(-2px) scale(1.05);
+
+  box-shadow:
+    0 10px 25px rgba(31, 133, 0, 0.45);
 }
+
+/* ========================= */
+/* TÍTULO DO TOPO */
+/* ========================= */
 
 .title-top {
-  font-weight: 700;
-  color: #333;
+  color: #1F8500;
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  text-align: left;
 }
 
+/* ========================= */
 /* PERFIL */
+/* ========================= */
+
 .profile-card {
+  width: 100%;
+
+  max-width: 700px;
+
+  margin: 0 auto 20px;
+
+  padding: 25px;
+
+  position: relative;
+
+  z-index: 2;
+
   text-align: center;
-  margin-top: 20px;
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s;
 }
+
+.profile-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ========================= */
+/* AVATAR */
+/* ========================= */
 
 .avatar {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 15px;
+
   border-radius: 50%;
-  background: #ddd;
+
+  background: rgba(31, 133, 0, 0.15);
+
   display: flex;
-  align-items: center;
+
   justify-content: center;
-  font-size: 40px;
-  margin: 0 auto;
+
+  align-items: center;
+
+  font-size: 38px;
 }
 
 .profile-card h2 {
-  margin-top: 10px;
+  color: #111827;
+
+  font-size: 24px;
+
   font-weight: 800;
+
+  margin-bottom: 5px;
 }
 
 .profile-card p {
-  color: gray;
+  color: #64748b;
+
+  font-size: 14px;
 }
 
-/* CARD GERAL */
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
 .card {
-  margin-top: 20px;
-  padding: 16px;
+  width: 100%;
 
-  background: rgba(215, 236, 247, 0.7);
-  backdrop-filter: blur(10px);
+  max-width: 700px;
 
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin: 0 auto 18px;
+
+  padding: 20px;
+
+  position: relative;
+
+  z-index: 2;
+
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s;
 }
 
-/* TITULO */
+.card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ========================= */
+/* TÍTULO DOS CARDS */
+/* ========================= */
+
 .card h3 {
   color: #1F8500;
-  margin-bottom: 10px;
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  margin-bottom: 20px;
 }
 
-/* BOTÕES DE ACESSO */
+/* ========================= */
+/* LIBERAR ACESSO */
+/* ========================= */
+
 .access-buttons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+
+  gap: 15px;
+
+  width: 100%;
 }
 
 .btn-lock {
-  width: 60px;
-  height: 40px;
+  flex: 1;
 
-  border-radius: 999px;
+  height: 60px;
+
   border: none;
 
-  background: linear-gradient(145deg, #2aa600, #1F8500);
+  border-radius: 16px;
+
+  font-size: 26px;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* ABRIR */
+
+.btn-lock:first-child {
+  background: rgba(31, 133, 0, 0.12);
+
+  color: #1F8500;
+}
+
+.btn-lock:first-child:hover {
+  background: #1F8500;
+
   color: white;
 
-  font-size: 18px;
-  cursor: pointer;
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(31, 133, 0, 0.3);
 }
 
-/* LINHAS USUÁRIOS */
+/* FECHAR */
+
+.btn-lock:last-child {
+  background: rgba(239, 68, 68, 0.12);
+
+  color: #ef4444;
+}
+
+.btn-lock:last-child:hover {
+  background: #ef4444;
+
+  color: white;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(239, 68, 68, 0.25);
+}
+
+/* ========================= */
+/* USUÁRIO */
+/* ========================= */
+
 .user-row {
+  width: 100%;
+
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
 
-  margin-top: 10px;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 12px 5px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  transition: 0.25s;
 }
+
+.user-row:last-child {
+  border-bottom: none;
+}
+
+.user-row:hover {
+  background: rgba(31, 133, 0, 0.05);
+
+  border-radius: 14px;
+
+  padding-left: 12px;
+
+  padding-right: 12px;
+}
+
+/* ========================= */
+/* LADO ESQUERDO DO USUÁRIO */
+/* ========================= */
 
 .row-left {
   display: flex;
+
   align-items: center;
-  gap: 10px;
+
+  gap: 14px;
 }
+
+/* ========================= */
+/* MINI AVATAR */
+/* ========================= */
 
 .mini-avatar {
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
+
   border-radius: 50%;
-  background: #ddd;
+
+  background: rgba(31, 133, 0, 0.13);
 
   display: flex;
-  align-items: center;
+
   justify-content: center;
+
+  align-items: center;
+
+  font-size: 22px;
 }
 
-.user-row p {
-  font-size: 12px;
-  color: gray;
+/* ========================= */
+/* NOME DO USUÁRIO */
+/* ========================= */
+
+.row-left strong {
+  display: block;
+
+  color: #111827;
+
+  font-size: 16px;
+
+  font-weight: 700;
 }
+
+.row-left p {
+  margin-top: 4px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+/* ========================= */
+/* CADEADO */
+/* ========================= */
 
 .lock {
-  font-size: 18px;
-}
+  width: 42px;
+  height: 42px;
 
-/* INPUT */
-.input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  flex-shrink: 0;
 
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  outline: none;
-}
+  border-radius: 50%;
 
-/* RADIO */
-.radio-group {
-  margin-top: 10px;
+  background: rgba(100, 116, 139, 0.10);
+
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 19px;
 }
 
+/* ========================= */
 /* BOTÃO ADICIONAR */
+/* ========================= */
+
 .add-btn {
-  margin-top: 15px;
   width: 100%;
 
-  padding: 12px;
-  border-radius: 999px;
+  padding: 16px;
 
   border: none;
-  background: #1F8500;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #1F8500,
+    #38B000
+  );
+
   color: white;
 
-  font-weight: 800;
+  font-size: 16px;
+
+  font-weight: bold;
+
   cursor: pointer;
 
-  box-shadow: 0 6px 15px rgba(31, 133, 0, 0.25);
+  box-shadow:
+    0 8px 20px rgba(31, 133, 0, 0.30);
+
+  transition: 0.25s;
 }
 
 .add-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(31, 133, 0, 0.35);
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 600px) {
+
+  .user-container {
+    padding: 18px;
+  }
+
+  .user-header {
+    gap: 12px;
+
+    margin-bottom: 30px;
+  }
+
+  .back-btn {
+    width: 45px;
+    height: 45px;
+
+    font-size: 20px;
+  }
+
+  .title-top {
+    font-size: 24px;
+  }
+
+  .profile-card {
+    padding: 22px 18px;
+
+    border-radius: 22px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+
+    font-size: 32px;
+  }
+
+  .profile-card h2 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .card h3 {
+    font-size: 20px;
+
+    margin-bottom: 16px;
+  }
+
+  .btn-lock {
+    height: 55px;
+
+    font-size: 24px;
+  }
+
+  .mini-avatar {
+    width: 45px;
+    height: 45px;
+
+    font-size: 20px;
+  }
+
+  .row-left strong {
+    font-size: 15px;
+  }
+
+  .row-left p {
+    font-size: 12px;
+  }
+
+  .add-btn {
+    padding: 15px;
+
+    font-size: 15px;
+  }
+}
+
+/* ========================= */
+/* CELULARES PEQUENOS */
+/* ========================= */
+
+@media (max-width: 380px) {
+
+  .user-container {
+    padding: 15px;
+  }
+
+  .title-top {
+    font-size: 21px;
+  }
+
+  .access-buttons {
+    gap: 10px;
+  }
+
+  .btn-lock {
+    height: 52px;
+  }
 }

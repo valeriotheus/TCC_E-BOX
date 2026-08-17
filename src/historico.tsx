@@ -8,17 +8,17 @@ export default function Historico() {
   const accessList = [
     {
       id: 1,
-      date: '23/02 às 18:40',
+      date: '23/02',
       code: '000001'
     },
     {
       id: 2,
-      date: '23/02 às 18:40',
+      date: '23/02',
       code: '000001'
     },
     {
       id: 3,
-      date: '23/02 às 18:40',
+      date: '23/02',
       code: '000001'
     }
   ]

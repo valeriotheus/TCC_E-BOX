@@ -18,8 +18,7 @@ function User() {
         >
           ←
         </button>
-
-        <h2 className="title-top">Tela de Usuário</h2>
+        
       </div>
 
       {/* PERFIL */}
@@ -76,7 +75,7 @@ function User() {
           className="add-btn"
           onClick={() => navigate('/conta')}
         >
-          + Adicionar Usuário
+          Adicionar Usuário
         </button>
       </div>
 

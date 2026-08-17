@@ -7,6 +7,7 @@ import Home from './home'
 import UserPage from './userpage'
 import Historico from './historico'
 import Conta from './conta'
+import Codigo from './codigo'
 
 function LoginView({
   email,
@@ -123,9 +124,11 @@ function App() {
       />
 
       <Route path="/home" element={<Home />} />
+      <Route path="/codigo" element={<Codigo />} />
       <Route path="/userpage" element={<UserPage />} />
       <Route path="/historico" element={<Historico />} />
       <Route path="/conta" element={<Conta />} />
+
     </Routes>
   )
 }
