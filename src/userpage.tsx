@@ -1,16 +1,39 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './userpage.css'
 
 function User() {
   const navigate = useNavigate()
 
+  const [inGroup, setInGroup] = useState(true)
+
+  const [usuarios, setUsuarios] = useState([
+    {
+      nome: 'Maria',
+      tipo: 'Convidada'
+    },
+    {
+      nome: 'Enzo',
+      tipo: 'Convidado'
+    }
+  ])
+
+  const sairDoGrupo = () => {
+    const confirmar = window.confirm(
+      'Tem certeza que deseja sair do grupo familiar?'
+    )
+
+    if (confirmar) {
+      setInGroup(false)
+      setUsuarios([])
+    }
+  }
+
   return (
     <div className="user-container">
 
       {/* HEADER */}
       <div className="user-header">
-
-        {/* BOTÃO VOLTAR */}
         <button
           type="button"
           className="back-btn"
@@ -18,13 +41,14 @@ function User() {
         >
           ←
         </button>
-        
       </div>
 
       {/* PERFIL */}
       <div className="profile-card">
         <div className="avatar">👤</div>
+
         <h2>José</h2>
+
         <p>Administrador</p>
       </div>
 
@@ -33,47 +57,85 @@ function User() {
         <h3>Liberar Acesso</h3>
 
         <div className="access-buttons">
-          <button className="btn-lock">🔓</button>
-          <button className="btn-lock">🔒</button>
+          <button
+            type="button"
+            className="btn-lock"
+          >
+            🔓
+          </button>
+
+          <button
+            type="button"
+            className="btn-lock"
+          >
+            🔒
+          </button>
         </div>
       </div>
 
       {/* GRUPO FAMILIAR */}
-      <div className="card">
+      <div className="card family-card">
+
         <h3>Grupo Familiar</h3>
 
-        <div className="user-row">
-          <div className="row-left">
-            <div className="mini-avatar">👤</div>
+        {inGroup && (
+          <p className="family-code">
+            Código da família:{' '}
+            <strong>EBX-7K4P9</strong>
+          </p>
+        )}
 
-            <div>
-              <strong>Maria</strong>
-              <p>Convidada</p>
+        {/* USUÁRIOS */}
+        {usuarios.map((usuario) => (
+          <div className="user-row" key={usuario.nome}>
+
+            <div className="row-left">
+
+              <div className="mini-avatar">
+                👤
+              </div>
+
+              <div>
+                <strong>{usuario.nome}</strong>
+                <p>{usuario.tipo}</p>
+              </div>
+
             </div>
+
+            <span className="lock">
+              🔒
+            </span>
+
           </div>
+        ))}
 
-          <span className="lock">🔒</span>
-        </div>
+        {/* BOTÃO DO GRUPO */}
+        {inGroup ? (
+          <button
+            type="button"
+            className="leave-btn"
+            onClick={sairDoGrupo}
+          >
+            Sair do Grupo
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="add-btn"
+            onClick={() => navigate('/EntrarFamilia')}
+          >
+            Entrar em um Grupo Familiar
+          </button>
+        )}
 
-        <div className="user-row">
-          <div className="row-left">
-            <div className="mini-avatar">👤</div>
-
-            <div>
-              <strong>Enzo</strong>
-              <p>Convidado</p>
-            </div>
-          </div>
-
-          <span className="lock">🔒</span>
-        </div>
       </div>
 
-      {/* BOTÃO ADICIONAR USUÁRIO */}
+      {/* ADICIONAR USUÁRIO */}
       <div className="card">
         <button
+          type="button"
           className="add-btn"
-          onClick={() => navigate('/conta')}
+          onClick={() => navigate('/ContaFamilia')}
         >
           Adicionar Usuário
         </button>

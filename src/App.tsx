@@ -8,6 +8,8 @@ import UserPage from './userpage'
 import Historico from './historico'
 import Conta from './conta'
 import Codigo from './codigo'
+import ContaFamilia from './contafamilia'
+import EntrarFamilia from './entrarfamilia'
 
 function LoginView({
   email,
@@ -128,6 +130,8 @@ function App() {
       <Route path="/userpage" element={<UserPage />} />
       <Route path="/historico" element={<Historico />} />
       <Route path="/conta" element={<Conta />} />
+      <Route path="/contafamilia" element={<ContaFamilia />} />
+      <Route path="/entrarfamilia" element={<EntrarFamilia />} />
 
     </Routes>
   )
