@@ -16,10 +16,8 @@
   --green: #1f8500;
   --green-dark: #176600;
   --green-light: #f1f9ee;
-
   --text: #1a1c1e;
   --muted: #64748b;
-
   --white: #ffffff;
 }
 
@@ -49,12 +47,11 @@
   );
 
   font-family: "Inter", Arial, sans-serif;
-
   color: var(--text);
 }
 
 /* =========================
-   DECORAÇÃO DO FUNDO
+   FUNDO
 ========================= */
 
 .user-container::before {
@@ -62,11 +59,11 @@
 
   position: fixed;
 
-  width: 360px;
-  height: 360px;
+  width: 400px;
+  height: 400px;
 
-  top: -180px;
-  left: -180px;
+  top: -200px;
+  left: -200px;
 
   border-radius: 50%;
 
@@ -85,11 +82,11 @@
 
   position: fixed;
 
-  width: 360px;
-  height: 360px;
+  width: 400px;
+  height: 400px;
 
-  right: -180px;
-  bottom: -180px;
+  right: -200px;
+  bottom: -200px;
 
   border-radius: 50%;
 
@@ -109,9 +106,9 @@
 
 .user-header {
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
 
-  height: 42px;
+  height: 44px;
 
   display: flex;
   align-items: center;
@@ -136,38 +133,29 @@
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.85);
 
   color: var(--green);
 
-  font-family: Arial, sans-serif;
-
   font-size: 24px;
   font-weight: 500;
-
-  line-height: 1;
 
   cursor: pointer;
 
   box-shadow:
     0 4px 12px rgba(15, 23, 42, 0.06);
 
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .back-btn:hover {
   background: var(--green);
-
   color: #ffffff;
 
   transform: translateX(-2px);
 
   box-shadow:
-    0 6px 16px rgba(31, 133, 0, 0.18);
+    0 7px 18px rgba(31, 133, 0, 0.20);
 }
 
 .back-btn:active {
@@ -175,7 +163,7 @@
 }
 
 .back-btn:focus-visible {
-  outline: 3px solid rgba(31, 133, 0, 0.18);
+  outline: 3px solid rgba(31, 133, 0, 0.20);
   outline-offset: 3px;
 }
 
@@ -185,11 +173,11 @@
 
 .profile-card {
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
 
   margin-top: 20px;
 
-  padding: 30px 28px;
+  padding: 36px 32px 34px;
 
   position: relative;
   z-index: 2;
@@ -198,14 +186,14 @@
   flex-direction: column;
   align-items: center;
 
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.90);
 
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
 
   border-radius: 26px;
 
   box-shadow:
-    0 20px 50px rgba(15, 23, 42, 0.08),
+    0 20px 50px rgba(15, 23, 42, 0.09),
     0 4px 12px rgba(15, 23, 42, 0.04);
 
   backdrop-filter: blur(16px);
@@ -219,14 +207,14 @@
 ========================= */
 
 .avatar {
-  width: 72px;
-  height: 72px;
+  width: 82px;
+  height: 82px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 17px;
+  margin-bottom: 20px;
 
   border-radius: 50%;
 
@@ -234,10 +222,10 @@
 
   border: 1px solid rgba(31, 133, 0, 0.15);
 
-  font-size: 38px;
+  font-size: 43px;
 
   box-shadow:
-    0 8px 20px rgba(31, 133, 0, 0.10);
+    0 8px 22px rgba(31, 133, 0, 0.11);
 }
 
 /* =========================
@@ -251,12 +239,12 @@
 
   color: var(--text);
 
-  font-size: 30px;
-  line-height: 1.2;
+  font-size: 34px;
+  line-height: 1.15;
 
-  font-weight: 800;
+  font-weight: 900;
 
-  letter-spacing: -0.7px;
+  letter-spacing: -1px;
 
   text-align: center;
 }
@@ -266,13 +254,14 @@
 ========================= */
 
 .profile-card p {
-  max-width: 310px;
+  width: 100%;
+  max-width: 360px;
 
-  margin-top: 10px;
+  margin-top: 12px;
 
   color: var(--muted);
 
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
 
   font-weight: 400;
@@ -281,23 +270,23 @@
 }
 
 /* =========================
-   CARD DA FAMÍLIA
+   CARD DO CÓDIGO
 ========================= */
 
 .card.family-card {
   width: 100%;
-  max-width: 430px;
+  max-width: 500px;
 
-  margin-top: 16px;
+  margin-top: 18px;
 
-  padding: 26px 28px;
+  padding: 30px 32px;
 
   position: relative;
   z-index: 2;
 
-  background: rgba(255, 255, 255, 0.90);
+  background: rgba(255, 255, 255, 0.92);
 
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
 
   border-radius: 23px;
 
@@ -310,7 +299,7 @@
 }
 
 /* =========================
-   TÍTULO DO CARD
+   TÍTULO DO INPUT
 ========================= */
 
 .family-card h3 {
@@ -318,7 +307,7 @@
 
   color: #475569;
 
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 800;
 
@@ -331,7 +320,7 @@
 
 .family-input {
   width: 100%;
-  height: 50px;
+  height: 52px;
 
   padding: 0 16px;
 
@@ -345,7 +334,7 @@
 
   font-family: "Inter", Arial, sans-serif;
 
-  font-size: 15px;
+  font-size: 16px;
 
   font-weight: 700;
 
@@ -360,22 +349,15 @@
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    box-shadow 0.2s ease;
 }
-
-/* =========================
-   PLACEHOLDER
-========================= */
 
 .family-input::placeholder {
   color: #94a3b8;
 
   opacity: 1;
 
-  font-family: "Inter", Arial, sans-serif;
-
-  font-size: 13px;
+  font-size: 14px;
 
   font-weight: 400;
 
@@ -384,28 +366,22 @@
   text-transform: none;
 }
 
-/* =========================
-   FOCO INPUT
-========================= */
-
 .family-input:focus {
   border-color: var(--green);
-
-  background: #ffffff;
 
   box-shadow:
     0 0 0 3px rgba(31, 133, 0, 0.12);
 }
 
 /* =========================
-   BOTÃO PRINCIPAL
+   BOTÃO
 ========================= */
 
 .add-btn {
   width: 100%;
-  height: 50px;
+  height: 52px;
 
-  margin-top: 14px;
+  margin-top: 15px;
 
   border: none;
 
@@ -417,7 +393,7 @@
 
   font-family: "Inter", Arial, sans-serif;
 
-  font-size: 14px;
+  font-size: 15px;
 
   font-weight: 800;
 
@@ -432,10 +408,6 @@
     box-shadow 0.2s ease;
 }
 
-/* =========================
-   HOVER
-========================= */
-
 .add-btn:hover {
   background: var(--green-dark);
 
@@ -445,20 +417,12 @@
     0 10px 24px rgba(31, 133, 0, 0.30);
 }
 
-/* =========================
-   CLICK
-========================= */
-
 .add-btn:active {
   transform: translateY(0);
 
   box-shadow:
     0 5px 12px rgba(31, 133, 0, 0.20);
 }
-
-/* =========================
-   FOCO DO BOTÃO
-========================= */
 
 .add-btn:focus-visible {
   outline: 3px solid rgba(31, 133, 0, 0.20);
@@ -479,8 +443,6 @@
     height: 40px;
   }
 
-  /* BOTÃO VOLTAR */
-
   .back-btn {
     width: 40px;
     height: 40px;
@@ -488,69 +450,83 @@
     font-size: 22px;
   }
 
-  /* CARD DO TÍTULO */
+  /* =====================
+     CARD DO TÍTULO
+  ===================== */
 
   .profile-card {
     margin-top: 16px;
 
-    padding: 26px 21px;
+    padding: 28px 20px 27px;
 
     border-radius: 23px;
   }
 
-  /* AVATAR */
+  /* =====================
+     AVATAR
+  ===================== */
 
   .avatar {
-    width: 66px;
-    height: 66px;
+    width: 72px;
+    height: 72px;
 
-    margin-bottom: 15px;
+    margin-bottom: 17px;
 
-    font-size: 34px;
+    font-size: 37px;
   }
 
-  /* TÍTULO MAIOR */
+  /* =====================
+     TÍTULO GRANDE
+  ===================== */
 
   .profile-card h2 {
     width: 100%;
 
     font-size: 27px;
-    line-height: 1.25;
+    line-height: 1.2;
 
-    letter-spacing: -0.5px;
+    font-weight: 900;
+
+    letter-spacing: -0.7px;
 
     text-align: center;
   }
 
-  /* DESCRIÇÃO */
+  /* =====================
+     DESCRIÇÃO
+  ===================== */
 
   .profile-card p {
-    margin-top: 8px;
+    max-width: 300px;
+
+    margin-top: 10px;
 
     font-size: 12px;
 
     text-align: center;
   }
 
-  /* CARD DA FAMÍLIA */
+  /* =====================
+     CARD DO CÓDIGO
+  ===================== */
 
   .card.family-card {
     margin-top: 13px;
 
-    padding: 23px 21px;
+    padding: 24px 20px;
 
     border-radius: 21px;
   }
 
-  /* TÍTULO DO CARD */
-
   .family-card h3 {
-    margin-bottom: 7px;
+    margin-bottom: 8px;
 
     font-size: 11px;
   }
 
-  /* INPUT */
+  /* =====================
+     INPUT
+  ===================== */
 
   .family-input {
     height: 48px;
@@ -560,7 +536,13 @@
     font-size: 14px;
   }
 
-  /* BOTÃO */
+  .family-input::placeholder {
+    font-size: 13px;
+  }
+
+  /* =====================
+     BOTÃO
+  ===================== */
 
   .add-btn {
     height: 48px;
@@ -587,17 +569,17 @@
   .profile-card {
     margin-top: 12px;
 
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 22px;
+    padding-bottom: 22px;
   }
 
   .avatar {
-    width: 58px;
-    height: 58px;
+    width: 64px;
+    height: 64px;
 
-    margin-bottom: 11px;
+    margin-bottom: 13px;
 
-    font-size: 30px;
+    font-size: 33px;
   }
 
   .profile-card h2 {
@@ -607,9 +589,7 @@
   }
 
   .profile-card p {
-    margin-top: 5px;
-
-    text-align: center;
+    margin-top: 7px;
   }
 
   .card.family-card {
