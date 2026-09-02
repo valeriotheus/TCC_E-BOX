@@ -1,0 +1,592 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+  --green: #1f8500;
+  --green-dark: #176600;
+  --green-light: #f1f9ee;
+
+  --text: #1a1c1e;
+  --muted: #64748b;
+
+  --white: #ffffff;
+}
+
+/* =========================
+   PÁGINA
+========================= */
+
+.user-container {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 28px 20px 40px;
+
+  position: relative;
+
+  overflow-x: hidden;
+
+  background: linear-gradient(
+    180deg,
+    #f3faff 0%,
+    #ffffff 100%
+  );
+
+  font-family: "Inter", Arial, sans-serif;
+
+  color: var(--text);
+}
+
+/* =========================
+   DECORAÇÃO DO FUNDO
+========================= */
+
+.user-container::before {
+  content: "";
+
+  position: fixed;
+
+  width: 360px;
+  height: 360px;
+
+  top: -180px;
+  left: -180px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(31, 133, 0, 0.16) 0%,
+    rgba(31, 133, 0, 0.05) 40%,
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+.user-container::after {
+  content: "";
+
+  position: fixed;
+
+  width: 360px;
+  height: 360px;
+
+  right: -180px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(31, 133, 0, 0.12) 0%,
+    rgba(31, 133, 0, 0.04) 40%,
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.user-header {
+  width: 100%;
+  max-width: 430px;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   BOTÃO VOLTAR
+========================= */
+
+.back-btn {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(31, 133, 0, 0.20);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.80);
+
+  color: var(--green);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 24px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.06);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--green);
+
+  color: #ffffff;
+
+  transform: translateX(-2px);
+
+  box-shadow:
+    0 6px 16px rgba(31, 133, 0, 0.18);
+}
+
+.back-btn:active {
+  transform: translateX(0);
+}
+
+.back-btn:focus-visible {
+  outline: 3px solid rgba(31, 133, 0, 0.18);
+  outline-offset: 3px;
+}
+
+/* =========================
+   CARD DO TÍTULO
+========================= */
+
+.profile-card {
+  width: 100%;
+  max-width: 430px;
+
+  margin-top: 20px;
+
+  padding: 30px 28px;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  text-align: center;
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 17px;
+
+  border-radius: 50%;
+
+  background: var(--green-light);
+
+  border: 1px solid rgba(31, 133, 0, 0.15);
+
+  font-size: 38px;
+
+  box-shadow:
+    0 8px 20px rgba(31, 133, 0, 0.10);
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.profile-card h2 {
+  color: var(--text);
+
+  font-size: 21px;
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  letter-spacing: -0.4px;
+}
+
+/* =========================
+   DESCRIÇÃO
+========================= */
+
+.profile-card p {
+  max-width: 310px;
+
+  margin-top: 9px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  font-weight: 400;
+}
+
+/* =========================
+   CARD DA FAMÍLIA
+========================= */
+
+.card.family-card {
+  width: 100%;
+  max-width: 430px;
+
+  margin-top: 16px;
+
+  padding: 26px 28px;
+
+  position: relative;
+  z-index: 2;
+
+  background: rgba(255, 255, 255, 0.90);
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 23px;
+
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.07),
+    0 4px 12px rgba(15, 23, 42, 0.03);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* =========================
+   TÍTULO DO CARD
+========================= */
+
+.family-card h3 {
+  margin-bottom: 9px;
+
+  color: #475569;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  text-align: center;
+}
+
+/* =========================
+   INPUT DO CÓDIGO
+========================= */
+
+.family-input {
+  width: 100%;
+  height: 50px;
+
+  padding: 0 16px;
+
+  border: 1px solid rgba(31, 133, 0, 0.22);
+
+  border-radius: 14px;
+
+  background: var(--white);
+
+  color: var(--text);
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+  outline: none;
+
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.04);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.family-input::placeholder {
+  color: #94a3b8;
+
+  opacity: 1;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 400;
+
+  letter-spacing: 0;
+
+  text-transform: none;
+}
+
+/* =========================
+   FOCO INPUT
+========================= */
+
+.family-input:focus {
+  border-color: var(--green);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(31, 133, 0, 0.12);
+}
+
+/* =========================
+   BOTÃO PRINCIPAL
+========================= */
+
+.add-btn {
+  width: 100%;
+  height: 50px;
+
+  margin-top: 14px;
+
+  border: none;
+
+  /* Menos arredondado */
+  border-radius: 12px;
+
+  background: var(--green);
+
+  color: #ffffff;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(31, 133, 0, 0.23);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* =========================
+   HOVER DO BOTÃO
+========================= */
+
+.add-btn:hover {
+  background: var(--green-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(31, 133, 0, 0.30);
+}
+
+/* =========================
+   CLICK DO BOTÃO
+========================= */
+
+.add-btn:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 5px 12px rgba(31, 133, 0, 0.20);
+}
+
+/* =========================
+   FOCO DO BOTÃO
+========================= */
+
+.add-btn:focus-visible {
+  outline: 3px solid rgba(31, 133, 0, 0.20);
+  outline-offset: 3px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .user-container {
+    padding: 20px 14px 30px;
+  }
+
+  .user-header {
+    height: 40px;
+  }
+
+  .back-btn {
+    width: 40px;
+    height: 40px;
+
+    font-size: 22px;
+  }
+
+  .profile-card {
+    margin-top: 16px;
+
+    padding: 26px 21px;
+
+    border-radius: 23px;
+  }
+
+  .avatar {
+    width: 66px;
+    height: 66px;
+
+    margin-bottom: 15px;
+
+    font-size: 34px;
+  }
+
+  .profile-card h2 {
+    font-size: 19px;
+  }
+
+  .profile-card p {
+    margin-top: 8px;
+
+    font-size: 12px;
+  }
+
+  .card.family-card {
+    margin-top: 13px;
+
+    padding: 23px 21px;
+
+    border-radius: 21px;
+  }
+
+  .family-card h3 {
+    margin-bottom: 7px;
+
+    font-size: 11px;
+  }
+
+  .family-input {
+    height: 48px;
+
+    padding: 0 14px;
+
+    font-size: 14px;
+  }
+
+  .add-btn {
+    height: 48px;
+
+    margin-top: 12px;
+
+    /* Mantém o botão quadrado/arredondado de forma moderada */
+    border-radius: 12px;
+
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   TELAS BAIXAS
+========================= */
+
+@media (max-height: 700px) {
+
+  .user-container {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+
+  .profile-card {
+    margin-top: 12px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .avatar {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 11px;
+
+    font-size: 30px;
+  }
+
+  .profile-card p {
+    margin-top: 5px;
+  }
+
+  .card.family-card {
+    margin-top: 10px;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .family-input {
+    height: 45px;
+  }
+
+  .add-btn {
+    height: 45px;
+
+    margin-top: 10px;
+
+    border-radius: 12px;
+  }
+}
