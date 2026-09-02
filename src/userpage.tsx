@@ -102,10 +102,6 @@ function User() {
 
             </div>
 
-            <span className="lock">
-              🔒
-            </span>
-
           </div>
         ))}
 
