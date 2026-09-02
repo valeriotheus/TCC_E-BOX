@@ -241,18 +241,22 @@
 }
 
 /* =========================
-   TÍTULO
+   TÍTULO PRINCIPAL
 ========================= */
 
 .profile-card h2 {
+  margin: 0;
+
   color: var(--text);
 
-  font-size: 21px;
-  line-height: 1.3;
+  font-size: 26px;
+  line-height: 1.25;
 
   font-weight: 800;
 
-  letter-spacing: -0.4px;
+  letter-spacing: -0.6px;
+
+  text-align: center;
 }
 
 /* =========================
@@ -262,7 +266,7 @@
 .profile-card p {
   max-width: 310px;
 
-  margin-top: 9px;
+  margin-top: 10px;
 
   color: var(--muted);
 
@@ -270,6 +274,8 @@
   line-height: 1.5;
 
   font-weight: 400;
+
+  text-align: center;
 }
 
 /* =========================
@@ -314,11 +320,11 @@
 
   font-weight: 800;
 
-  text-align: center;
+  text-align: left;
 }
 
 /* =========================
-   INPUT DO CÓDIGO
+   INPUT
 ========================= */
 
 .family-input {
@@ -401,7 +407,6 @@
 
   border: none;
 
-  /* Menos arredondado */
   border-radius: 12px;
 
   background: var(--green);
@@ -426,7 +431,7 @@
 }
 
 /* =========================
-   HOVER DO BOTÃO
+   HOVER
 ========================= */
 
 .add-btn:hover {
@@ -439,7 +444,7 @@
 }
 
 /* =========================
-   CLICK DO BOTÃO
+   CLICK
 ========================= */
 
 .add-btn:active {
@@ -472,12 +477,16 @@
     height: 40px;
   }
 
+  /* BOTÃO VOLTAR */
+
   .back-btn {
     width: 40px;
     height: 40px;
 
     font-size: 22px;
   }
+
+  /* CARD DO TÍTULO */
 
   .profile-card {
     margin-top: 16px;
@@ -486,6 +495,8 @@
 
     border-radius: 23px;
   }
+
+  /* AVATAR */
 
   .avatar {
     width: 66px;
@@ -496,15 +507,25 @@
     font-size: 34px;
   }
 
+  /* TÍTULO */
+
   .profile-card h2 {
-    font-size: 19px;
+    font-size: 23px;
+
+    line-height: 1.3;
+
+    letter-spacing: -0.4px;
   }
+
+  /* DESCRIÇÃO */
 
   .profile-card p {
     margin-top: 8px;
 
     font-size: 12px;
   }
+
+  /* CARD DA FAMÍLIA */
 
   .card.family-card {
     margin-top: 13px;
@@ -514,11 +535,15 @@
     border-radius: 21px;
   }
 
+  /* TÍTULO DO CARD */
+
   .family-card h3 {
     margin-bottom: 7px;
 
     font-size: 11px;
   }
+
+  /* INPUT */
 
   .family-input {
     height: 48px;
@@ -528,12 +553,13 @@
     font-size: 14px;
   }
 
+  /* BOTÃO */
+
   .add-btn {
     height: 48px;
 
     margin-top: 12px;
 
-    /* Mantém o botão quadrado/arredondado de forma moderada */
     border-radius: 12px;
 
     font-size: 13px;
@@ -565,6 +591,10 @@
     margin-bottom: 11px;
 
     font-size: 30px;
+  }
+
+  .profile-card h2 {
+    font-size: 22px;
   }
 
   .profile-card p {
