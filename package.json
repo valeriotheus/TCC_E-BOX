@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
     "@react-native-firebase/app": "^25.0.1",
     "@react-native-firebase/auth": "^25.0.1",
     "@react-native-firebase/crashlytics": "^25.0.1",
     "expo": "^56.0.12",
-    "firebase": "^12.15.0",
+    "firebase": "^12.18.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.2"
