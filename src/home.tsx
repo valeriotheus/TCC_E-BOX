@@ -97,7 +97,7 @@ function Home() {
               onClick={() => apagarCodigo(index)}
               title="Apagar código"
             >
-              🗑️
+              ❌
             </button>
 
             {/* CÓDIGO */}
@@ -162,14 +162,6 @@ function Home() {
       </div>
 
       <br />
-
-      {/* SAIR */}
-      <button
-        className="logout"
-        onClick={() => navigate('/')}
-      >
-        Sair
-      </button>
 
     </div>
   )
