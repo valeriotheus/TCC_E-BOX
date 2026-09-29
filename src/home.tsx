@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ref, set } from 'firebase/database'
+import { ref, onValue, remove } from 'firebase/database'
 import { db } from './firebase'
 import './home.css'
 
@@ -8,36 +8,46 @@ function Home() {
   const navigate = useNavigate()
 
   const [mostrarCamera, setMostrarCamera] = useState(false)
+  const [senha, setSenha] = useState<any[]>([])
+  const [carregando, setCarregando] = useState(true)
 
-  const [senha, setSenha] = useState([
-    { senha: '00001', user: 'José' },
-    { senha: '02568', user: 'José' },
-    { senha: '89558', user: 'José' }
-  ])
-
-  // Envia os códigos iniciais para o Firebase
+  // Escutar dados em tempo real do Firebase
   useEffect(() => {
     const senhasRef = ref(db, '/Senhas')
-    set(senhasRef, senha)
+
+    const unsubscribe = onValue(senhasRef, (snapshot) => {
+      const data = snapshot.val()
+
+      if (data) {
+        // Firebase retorna objeto, converter para array com IDs
+        const lista = Object.entries(data).map(([id, valor]: any) => ({
+          id,
+          senha: valor.senha,
+          user: valor.user
+        }))
+        setSenha(lista)
+      } else {
+        setSenha([])
+      }
+
+      setCarregando(false)
+    })
+
+    return () => unsubscribe()
   }, [])
 
   // Apagar código
-  const apagarCodigo = async (index: number) => {
+  const apagarCodigo = async (id: string, senhaTexto: string) => {
     const confirmar = window.confirm(
-      `Deseja realmente apagar o código ${senha[index].senha}?`
+      `Deseja realmente apagar o código ${senhaTexto}?`
     )
 
-    if (!confirmar) {
-      return
-    }
+    if (!confirmar) return
 
     try {
-      const novoArray = senha.filter((_, i) => i !== index)
-
-      await set(ref(db, '/Senhas'), novoArray)
-
-      setSenha(novoArray)
-
+      await remove(ref(db, `/Senhas/${id}`))
+      // O onValue atualiza a lista automaticamente
+      alert('Código apagado com sucesso!')
     } catch (error) {
       console.error('Erro ao apagar código:', error)
       alert('Não foi possível apagar o código.')
@@ -84,17 +94,29 @@ function Home() {
       {/* LISTA DE CÓDIGOS */}
       <div className="codes-list">
 
-        {senha.map((item, index) => (
+        {carregando && (
+          <p style={{ textAlign: 'center', color: '#888' }}>
+            Carregando...
+          </p>
+        )}
+
+        {!carregando && senha.length === 0 && (
+          <p style={{ textAlign: 'center', color: '#888' }}>
+            Nenhum código cadastrado ainda.
+          </p>
+        )}
+
+        {senha.map((item) => (
 
           <div
-            key={index}
+            key={item.id}
             className="code-card"
           >
 
             {/* LIXEIRA */}
             <button
               className="delete-btn"
-              onClick={() => apagarCodigo(index)}
+              onClick={() => apagarCodigo(item.id, item.senha)}
               title="Apagar código"
             >
               ❌
@@ -118,11 +140,11 @@ function Home() {
       </div>
 
       <button
-  className="create-code-btn"
-  onClick={() => navigate('/codigo')}
->
-  Criar Código de Acesso
-</button>
+        className="create-code-btn"
+        onClick={() => navigate('/codigo')}
+      >
+        Criar Código de Acesso
+      </button>
 
       {/* SETA */}
       <div className="arrow">
@@ -162,6 +184,14 @@ function Home() {
       </div>
 
       <br />
+
+      {/* SAIR */}
+      <button
+        className="logout"
+        onClick={() => navigate('/')}
+      >
+        Sair
+      </button>
 
     </div>
   )
