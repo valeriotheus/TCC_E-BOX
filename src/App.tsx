@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from './firebase'
+import { ref, set } from 'firebase/database'
+import { auth, db } from './firebase'
 import './App.css'
 import Home from './home'
 import UserPage from './userpage'
@@ -72,7 +73,7 @@ function LoginView({
           <span>Não tem uma conta?</span>
           <br /><br />
           <button
-            className="btn-secondary"
+            className="secondary-btn"
             onClick={goToConta}
           >
             Criar conta no E-BOX
@@ -89,24 +90,54 @@ function App() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
+  // ⏰ ATUALIZA A HORA NO FIREBASE A CADA 10 SEGUNDOS
+  useEffect(() => {
+    const atualizarHora = () => {
+      const agora = new Date()
+      const dataFormatada = agora.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      })
+
+      console.log('🕐 Salvando hora:', dataFormatada)
+
+      set(ref(db, '/DataHora/atual'), dataFormatada)
+        .then(() => console.log('✅ Hora salva com sucesso!'))
+        .catch((err) => console.error('❌ Erro ao salvar hora:', err))
+    }
+
+    // Executa imediatamente
+    atualizarHora()
+
+    // Depois a cada 10 segundos
+    const intervalo = setInterval(atualizarHora, 10000)
+
+    // Cleanup
+    return () => clearInterval(intervalo)
+  }, [])
+
   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault()
-  
-  try {
-    // Valida o e-mail e senha diretamente no Firebase Auth
-    await signInWithEmailAndPassword(auth, email, password)
-    
-    // Limpa os campos do formulário
-    setEmail('')
-    setPassword('')
-    
-    // Redireciona para a home apenas se a validação der certo
-    navigate('/home')
-  } catch (error) {
-    console.error("Erro na validação do login:", error)
-    alert("E-mail ou senha incorretos. Por favor, tente novamente.")
+    e.preventDefault()
+
+    try {
+      // Valida o e-mail e senha diretamente no Firebase Auth
+      await signInWithEmailAndPassword(auth, email, password)
+
+      // Limpa os campos do formulário
+      setEmail('')
+      setPassword('')
+
+      // Redireciona para a home apenas se a validação der certo
+      navigate('/home')
+    } catch (error) {
+      console.error("Erro na validação do login:", error)
+      alert("E-mail ou senha incorretos. Por favor, tente novamente.")
+    }
   }
-}
 
   return (
     <Routes>
