@@ -256,7 +256,8 @@
    BOTÃO SECUNDÁRIO
 ========================= */
 
-.btn-secondary {
+.btn-secondary,
+.secondary-btn {
   margin-top: 10px;
 
   width: 100%;
@@ -278,7 +279,8 @@
   transition: 0.2s;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.secondary-btn:hover {
   background: var(--green);
 
   color: white;
