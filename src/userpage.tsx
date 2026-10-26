@@ -20,8 +20,9 @@ function User() {
   const [carregando, setCarregando] = useState(true)
   const [nomeUsuario, setNomeUsuario] = useState('Usuário')
   const [codigoInput, setCodigoInput] = useState('')
+  const [statusPorta, setStatusPorta] = useState('TRANCADA')
 
-  // ============ ESCUTAR DADOS EM TEMPO REAL ============
+  // ============ ESCUTAR DADOS EM TEMPO REAL E NOTIFICAÇÕES ============
   useEffect(() => {
     const user = auth.currentUser
     if (!user) {
@@ -31,7 +32,34 @@ function User() {
 
     setNomeUsuario(user.displayName || user.email?.split('@')[0] || 'Usuário')
 
-    // 1. Escuta o grupoId do usuário atual
+    // 🔔 1. Pede permissão para enviar notificações no navegador
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission()
+    }
+
+    // 🔔 2. Escuta o status da porta e dispara a notificação
+    let statusAnterior = 'TRANCADA'
+    const statusRef = ref(db, '/E-box(esp)/Status')
+    
+    const unsubscribeStatus = onValue(statusRef, (snap) => {
+      if (snap.exists()) {
+        const novoStatus = snap.val()
+        setStatusPorta(novoStatus)
+
+        // Se o status mudou e temos permissão, mostra a notificação
+        if (novoStatus !== statusAnterior) {
+          if (Notification.permission === 'granted') {
+            const titulo = novoStatus === 'ABERTA' ? '🔓 Porta Aberta!' : '🔒 Porta Trancada!'
+            const corpo = `A E-BOX mudou o status para ${novoStatus}.`
+            
+            new Notification(titulo, { body: corpo })
+          }
+          statusAnterior = novoStatus
+        }
+      }
+    })
+
+    // 3. Escuta o grupoId do usuário atual
     const userRef = ref(db, `/Usuarios/${user.uid}`)
     
     const unsubscribeUser = onValue(userRef, (userSnap) => {
@@ -49,7 +77,7 @@ function User() {
       setCodigoFamilia(grupoId)
       setInGroup(true)
 
-      // 2. Escuta TODOS os usuários para achar quem tem o mesmo grupoId
+      // 4. Escuta TODOS os usuários para achar quem tem o mesmo grupoId
       const usuariosRef = ref(db, '/Usuarios')
       
       const unsubscribeUsuarios = onValue(usuariosRef, (snapshot) => {
@@ -71,7 +99,10 @@ function User() {
       return () => unsubscribeUsuarios()
     })
 
-    return () => unsubscribeUser()
+    return () => {
+      unsubscribeUser()
+      unsubscribeStatus()
+    }
   }, [navigate])
 
   // ============ GERAR CÓDIGO ============
@@ -102,13 +133,11 @@ function User() {
     try {
       const novoCodigo = gerarCodigoFamilia()
 
-      // 1. Cria o grupo
       await set(ref(db, `/Grupos/${novoCodigo}`), {
         adminUid: user.uid,
         criadoEm: new Date().toLocaleString('pt-BR')
       })
 
-      // 2. Salva o grupoId no usuário
       await update(ref(db, `/Usuarios/${user.uid}`), {
         nome: nomeUsuario,
         grupoId: novoCodigo
@@ -134,7 +163,6 @@ function User() {
     }
 
     try {
-      // 1. Verifica se o grupo existe
       const grupoRef = ref(db, `/Grupos/${codigoLimpo}`)
       const snapshot = await get(grupoRef)
 
@@ -143,7 +171,6 @@ function User() {
         return
       }
 
-      // 2. Salva o grupoId no usuário
       await update(ref(db, `/Usuarios/${user.uid}`), {
         nome: nomeUsuario,
         grupoId: codigoLimpo
@@ -168,19 +195,16 @@ function User() {
     if (!confirmar) return
 
     try {
-      // 1. Verifica se é admin
       const grupoRef = ref(db, `/Grupos/${codigoFamilia}`)
       const snapshot = await get(grupoRef)
       const grupo = snapshot.val()
 
       if (grupo?.adminUid === user.uid) {
-        // É admin: pergunta se quer deletar tudo
         const deletar = window.confirm(
           'Você é o admin. Deseja DELETAR o grupo para todos os membros?'
         )
 
         if (deletar) {
-          // Remove grupoId de todos os membros
           const usuariosSnap = await get(ref(db, '/Usuarios'))
           const usuarios = usuariosSnap.val() || {}
 
@@ -190,14 +214,12 @@ function User() {
             }
           }
 
-          // Remove o grupo
           await remove(grupoRef)
           alert('Grupo deletado para todos!')
         } else {
           return
         }
       } else {
-        // É convidado: só sai
         await remove(ref(db, `/Usuarios/${user.uid}/grupoId`))
         alert('Você saiu do grupo!')
       }
@@ -216,7 +238,6 @@ function User() {
     if (!confirmar) return
 
     try {
-      // Verifica se é admin
       const grupoSnap = await get(ref(db, `/Grupos/${codigoFamilia}`))
       const grupo = grupoSnap.val()
 
@@ -229,6 +250,22 @@ function User() {
       alert(`${nome} foi removido!`)
     } catch (error) {
       console.error('Erro:', error)
+    }
+  }
+
+  // ============ CONTROLAR PORTA ============
+  const controlarPorta = async (acao: 'ABRIR' | 'FECHAR') => {
+    const confirmar = window.confirm(
+      `Deseja realmente ${acao === 'ABRIR' ? 'ABRIR' : 'FECHAR'} a porta?`
+    )
+    if (!confirmar) return
+
+    try {
+      await set(ref(db, '/E-box(esp)/Comando'), acao)
+      alert(`Comando de ${acao} enviado!`)
+    } catch (error) {
+      console.error('Erro ao controlar porta:', error)
+      alert('Erro ao enviar o comando.')
     }
   }
 
@@ -256,9 +293,29 @@ function User() {
       {/* LIBERAR ACESSO */}
       <div className="card">
         <h3>Liberar Acesso</h3>
+        
+        <p style={{ textAlign: 'center', marginBottom: '15px', color: statusPorta === 'ABERTA' ? 'green' : 'red', fontWeight: 'bold' }}>
+          Status atual: {statusPorta}
+        </p>
+
         <div className="access-buttons">
-          <button type="button" className="btn-lock">🔓</button>
-          <button type="button" className="btn-lock">🔒</button>
+          <button 
+            type="button" 
+            className="btn-lock" 
+            onClick={() => controlarPorta('ABRIR')}
+            style={{ opacity: statusPorta === 'ABERTA' ? 0.5 : 1 }}
+          >
+            🔓
+          </button>
+          
+          <button 
+            type="button" 
+            className="btn-lock" 
+            onClick={() => controlarPorta('FECHAR')}
+            style={{ opacity: statusPorta === 'TRANCADA' ? 0.5 : 1 }}
+          >
+            🔒
+          </button>
         </div>
       </div>
 
@@ -314,7 +371,6 @@ function User() {
               <p>Crie seu próprio grupo ou entre com um código.</p>
             </div>
 
-            {/* CRIAR */}
             <button
               type="button"
               className="create-family-btn"
@@ -323,7 +379,6 @@ function User() {
               + Criar Grupo Familiar
             </button>
 
-            {/* ENTRAR COM CÓDIGO */}
             <div className="input-group" style={{ marginTop: 16 }}>
               <input
                 type="text"
