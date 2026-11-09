@@ -32,12 +32,10 @@ function User() {
 
     setNomeUsuario(user.displayName || user.email?.split('@')[0] || 'Usuário')
 
-    // 🔔 1. Pede permissão para enviar notificações no navegador
     if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
       Notification.requestPermission()
     }
 
-    // 🔔 2. Escuta o status da porta e dispara a notificação
     let statusAnterior = 'TRANCADA'
     const statusRef = ref(db, '/E-box(esp)/Status')
     
@@ -46,12 +44,10 @@ function User() {
         const novoStatus = snap.val()
         setStatusPorta(novoStatus)
 
-        // Se o status mudou e temos permissão, mostra a notificação
         if (novoStatus !== statusAnterior) {
           if (Notification.permission === 'granted') {
             const titulo = novoStatus === 'ABERTA' ? '🔓 Porta Aberta!' : '🔒 Porta Trancada!'
             const corpo = `A E-BOX mudou o status para ${novoStatus}.`
-            
             new Notification(titulo, { body: corpo })
           }
           statusAnterior = novoStatus
@@ -59,12 +55,9 @@ function User() {
       }
     })
 
-    // 3. Escuta o grupoId do usuário atual
     const userRef = ref(db, `/Usuarios/${user.uid}`)
-    
     const unsubscribeUser = onValue(userRef, (userSnap) => {
-      const userData = userSnap.val()
-      const grupoId = userData?.grupoId
+      const grupoId = userSnap.val()?.grupoId
 
       if (!grupoId) {
         setInGroup(false)
@@ -77,12 +70,9 @@ function User() {
       setCodigoFamilia(grupoId)
       setInGroup(true)
 
-      // 4. Escuta TODOS os usuários para achar quem tem o mesmo grupoId
       const usuariosRef = ref(db, '/Usuarios')
-      
       const unsubscribeUsuarios = onValue(usuariosRef, (snapshot) => {
         const todos = snapshot.val() || {}
-        
         const membros: Membro[] = Object.entries(todos)
           .filter(([_, dados]: any) => dados.grupoId === grupoId)
           .map(([uid, dados]: any) => ({
@@ -91,11 +81,9 @@ function User() {
             tipo: uid === user.uid ? 'Você' : 'Membro',
             isVoce: uid === user.uid
           }))
-
         setUsuarios(membros)
         setCarregando(false)
       })
-
       return () => unsubscribeUsuarios()
     })
 
@@ -253,7 +241,7 @@ function User() {
     }
   }
 
-  // ============ CONTROLAR PORTA ============
+  // ============ CONTROLAR PORTA (COM ATUALIZAÇÃO OTIMISTA) ============
   const controlarPorta = async (acao: 'ABRIR' | 'FECHAR') => {
     const confirmar = window.confirm(
       `Deseja realmente ${acao === 'ABRIR' ? 'ABRIR' : 'FECHAR'} a porta?`
@@ -261,10 +249,27 @@ function User() {
     if (!confirmar) return
 
     try {
+      // 1. Atualiza a tela IMEDIATAMENTE
+      setStatusPorta(acao === 'ABRIR' ? 'ABERTA' : 'TRANCADA')
+
+      // 2. Envia o comando para o Firebase
       await set(ref(db, '/E-box(esp)/Comando'), acao)
-      alert(`Comando de ${acao} enviado!`)
+
+      // 3. Verifica após 2.5s se o ESP32 obedeceu
+      setTimeout(async () => {
+        const statusRef = ref(db, '/E-box(esp)/Status')
+        const snapshot = await get(statusRef)
+        const statusReal = snapshot.val()
+        const statusEsperado = acao === 'ABRIR' ? 'ABERTA' : 'TRANCADA'
+
+        if (statusReal !== statusEsperado) {
+          setStatusPorta(statusReal)
+        }
+      }, 2500)
+
     } catch (error) {
       console.error('Erro ao controlar porta:', error)
+      setStatusPorta(acao === 'ABRIR' ? 'TRANCADA' : 'ABERTA')
       alert('Erro ao enviar o comando.')
     }
   }
@@ -294,7 +299,12 @@ function User() {
       <div className="card">
         <h3>Liberar Acesso</h3>
         
-        <p style={{ textAlign: 'center', marginBottom: '15px', color: statusPorta === 'ABERTA' ? 'green' : 'red', fontWeight: 'bold' }}>
+        <p style={{ 
+          textAlign: 'center', 
+          marginBottom: '15px', 
+          color: statusPorta === 'ABERTA' ? 'green' : 'red', 
+          fontWeight: 'bold' 
+        }}>
           Status atual: {statusPorta}
         </p>
 
@@ -304,6 +314,7 @@ function User() {
             className="btn-lock" 
             onClick={() => controlarPorta('ABRIR')}
             style={{ opacity: statusPorta === 'ABERTA' ? 0.5 : 1 }}
+            disabled={statusPorta === 'ABERTA'}
           >
             🔓
           </button>
@@ -313,6 +324,7 @@ function User() {
             className="btn-lock" 
             onClick={() => controlarPorta('FECHAR')}
             style={{ opacity: statusPorta === 'TRANCADA' ? 0.5 : 1 }}
+            disabled={statusPorta === 'TRANCADA'}
           >
             🔒
           </button>
