@@ -241,7 +241,7 @@ function User() {
     }
   }
 
-  // ============ CONTROLAR PORTA (COM ATUALIZAÇÃO OTIMISTA) ============
+  // ============ CONTROLAR PORTA ============
   const controlarPorta = async (acao: 'ABRIR' | 'FECHAR') => {
     const confirmar = window.confirm(
       `Deseja realmente ${acao === 'ABRIR' ? 'ABRIR' : 'FECHAR'} a porta?`
@@ -249,13 +249,9 @@ function User() {
     if (!confirmar) return
 
     try {
-      // 1. Atualiza a tela IMEDIATAMENTE
       setStatusPorta(acao === 'ABRIR' ? 'ABERTA' : 'TRANCADA')
-
-      // 2. Envia o comando para o Firebase
       await set(ref(db, '/E-box(esp)/Comando'), acao)
 
-      // 3. Verifica após 2.5s se o ESP32 obedeceu
       setTimeout(async () => {
         const statusRef = ref(db, '/E-box(esp)/Status')
         const snapshot = await get(statusRef)
@@ -299,22 +295,20 @@ function User() {
       <div className="card">
         <h3>Liberar Acesso</h3>
         
-        <p style={{ 
-          textAlign: 'center', 
-          marginBottom: '15px', 
-          color: statusPorta === 'ABERTA' ? 'green' : 'red', 
-          fontWeight: 'bold' 
-        }}>
-          Status atual: {statusPorta}
-        </p>
+        {/* Pílula de status corrigida */}
+        <div className="status-container">
+          <div className={`status-pill ${statusPorta.trim().toUpperCase() === 'ABERTA' ? 'open' : 'closed'}`}>
+            {statusPorta.trim().toUpperCase() === 'ABERTA' ? '🔓 Porta Aberta' : '🔒 Porta Trancada'}
+          </div>
+        </div>
 
         <div className="access-buttons">
           <button 
             type="button" 
             className="btn-lock" 
             onClick={() => controlarPorta('ABRIR')}
-            style={{ opacity: statusPorta === 'ABERTA' ? 0.5 : 1 }}
-            disabled={statusPorta === 'ABERTA'}
+            style={{ opacity: statusPorta.trim().toUpperCase() === 'ABERTA' ? 0.5 : 1 }}
+            disabled={statusPorta.trim().toUpperCase() === 'ABERTA'}
           >
             🔓
           </button>
@@ -323,8 +317,8 @@ function User() {
             type="button" 
             className="btn-lock" 
             onClick={() => controlarPorta('FECHAR')}
-            style={{ opacity: statusPorta === 'TRANCADA' ? 0.5 : 1 }}
-            disabled={statusPorta === 'TRANCADA'}
+            style={{ opacity: statusPorta.trim().toUpperCase() === 'TRANCADA' ? 0.5 : 1 }}
+            disabled={statusPorta.trim().toUpperCase() === 'TRANCADA'}
           >
             🔒
           </button>

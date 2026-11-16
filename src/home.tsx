@@ -113,6 +113,8 @@ function Home() {
               src={`http://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
+              // 👇 ADICIONADO APENAS ESTE STYLE 👇
+              style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
               onError={() => {
                 alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera e se nenhuma outra aba está aberta com o stream.");
                 setMostrarCamera(false);
