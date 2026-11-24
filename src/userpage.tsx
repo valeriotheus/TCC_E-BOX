@@ -32,7 +32,10 @@ function User() {
 
     setNomeUsuario(user.displayName || user.email?.split('@')[0] || 'Usuário')
 
-    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+    // 🔔 CORREÇÃO: Só tenta usar notificações se a API existir (navegador)
+    const temNotificacao = typeof window !== 'undefined' && 'Notification' in window
+
+    if (temNotificacao && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
       Notification.requestPermission()
     }
 
@@ -45,7 +48,8 @@ function User() {
         setStatusPorta(novoStatus)
 
         if (novoStatus !== statusAnterior) {
-          if (Notification.permission === 'granted') {
+          // 🔔 CORREÇÃO: Só dispara a notificação no navegador
+          if (temNotificacao && Notification.permission === 'granted') {
             const titulo = novoStatus === 'ABERTA' ? '🔓 Porta Aberta!' : '🔒 Porta Trancada!'
             const corpo = `A E-BOX mudou o status para ${novoStatus}.`
             new Notification(titulo, { body: corpo })
@@ -92,6 +96,8 @@ function User() {
       unsubscribeStatus()
     }
   }, [navigate])
+
+  // ... (o resto das funções gerarCodigoFamilia, criarGrupo, entrarNoGrupo, sairDoGrupo, removerUsuario, controlarPorta permanecem iguais)
 
   // ============ GERAR CÓDIGO ============
   const gerarCodigoFamilia = () => {
@@ -295,7 +301,6 @@ function User() {
       <div className="card">
         <h3>Liberar Acesso</h3>
         
-        {/* Pílula de status corrigida */}
         <div className="status-container">
           <div className={`status-pill ${statusPorta.trim().toUpperCase() === 'ABERTA' ? 'open' : 'closed'}`}>
             {statusPorta.trim().toUpperCase() === 'ABERTA' ? '🔓 Porta Aberta' : '🔒 Porta Trancada'}
