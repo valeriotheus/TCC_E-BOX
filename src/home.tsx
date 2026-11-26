@@ -113,6 +113,7 @@ function Home() {
               src={`https://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               onError={() => {
                 alert("Não foi possível carregar o vídeo. Verifique se o terminal do Ngrok ainda está aberto e se clicou em 'Start Stream' na página da câmera.");
                 setMostrarCamera(false);
