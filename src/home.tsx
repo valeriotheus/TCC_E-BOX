@@ -10,8 +10,9 @@ function Home() {
   const [mostrarCamera, setMostrarCamera] = useState(false)
   const [senha, setSenha] = useState<any[]>([])
   const [carregando, setCarregando] = useState(true)
+  const [cameraImgUrl, setCameraImgUrl] = useState('') // 🆕 Estado para a imagem
 
-  // ✅ Link do Ngrok (sem https e sem a porta, pois o Ngrok já redireciona)
+  // ✅ Link do Ngrok (SEM https e SEM barra no final)
   const ipCamera = 'jubilant-crablike-kinfolk.ngrok-free.dev' 
 
   // ============ BUSCAR SENHAS FILTRADAS PELO GRUPO ============
@@ -53,6 +54,36 @@ function Home() {
     })
     return () => unsubscribeUser()
   }, [navigate])
+
+  // 🆕 ============ FUNÇÃO PARA CARREGAR O VÍDEO DO NGROK ============
+  const carregarCamera = async () => {
+    try {
+      const response = await fetch(`https://${ipCamera}/stream`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true' // 🔑 O SEGREDO PARA PASSAR PELO AVISO
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao conectar na câmera')
+      }
+
+      const blob = await response.blob()
+      const url = URL.createObjectURL(blob)
+      setCameraImgUrl(url)
+    } catch (error) {
+      console.error(error)
+      alert("Não foi possível carregar o vídeo. Verifique se o Ngrok está aberto e se clicou em 'Start Stream' na câmera.")
+      setMostrarCamera(false)
+    }
+  }
+
+  // Executa a função quando a câmera é mostrada
+  useEffect(() => {
+    if (mostrarCamera) {
+      carregarCamera()
+    }
+  }, [mostrarCamera])
 
   const apagarCodigo = async (id: string, senhaTexto: string) => {
     const confirmar = window.confirm(`Deseja realmente apagar o código ${senhaTexto}?`)
@@ -96,7 +127,7 @@ function Home() {
       <button className="create-code-btn" onClick={() => navigate('/codigo')}>Criar Código de Acesso</button>
       <div className="arrow"></div>
 
-      {/* CARD DA CÂMERA (MODO VÍDEO) */}
+      {/* CARD DA CÂMERA */}
       <div className="camera-card">
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
@@ -108,17 +139,16 @@ function Home() {
               Mostrar Câmera
             </button>
           ) : (
-            <img 
-              // ✅ URL usando https + Ngrok + /stream (Vídeo)
-              src={`https://${ipCamera}/stream`} 
-              alt="Câmera ao Vivo" 
-              className="camera-image"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              onError={() => {
-                alert("Não foi possível carregar o vídeo. Verifique se o terminal do Ngrok está aberto, se você já clicou em 'Visit Site' no Ngrok e se clicou em 'Start Stream' na página da câmera.");
-                setMostrarCamera(false);
-              }}
-            />
+            cameraImgUrl ? (
+              <img 
+                src={cameraImgUrl} 
+                alt="Câmera ao Vivo" 
+                className="camera-image"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            ) : (
+              <p style={{ color: 'white' }}>Carregando vídeo...</p>
+            )
           )}
         </div>
       </div>
