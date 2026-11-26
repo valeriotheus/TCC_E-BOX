@@ -13,7 +13,7 @@ function Home() {
   const [cameraImgUrl, setCameraImgUrl] = useState('') // 🆕 Estado para a imagem
 
   // ✅ Link do Ngrok (SEM https e SEM barra no final)
-  const ipCamera = 'jubilant-crablike-kinfolk.ngrok-free.dev' 
+  const ipCamera = 'https://jubilant-crablike-kinfolk.ngrok-free.dev/stream' 
 
   // ============ BUSCAR SENHAS FILTRADAS PELO GRUPO ============
   useEffect(() => {
