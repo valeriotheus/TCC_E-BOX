@@ -11,8 +11,8 @@ function Home() {
   const [senha, setSenha] = useState<any[]>([])
   const [carregando, setCarregando] = useState(true)
 
-  // ✅ IP SEM a porta 81 (Modo foto usa a porta padrão 80)
-  const ipCamera = '10.214.94.174' 
+  // IP com a porta 81 para o stream de vídeo
+  const ipCamera = '10.214.94.174:81' 
 
   // ============ BUSCAR SENHAS FILTRADAS PELO GRUPO ============
   useEffect(() => {
@@ -96,7 +96,7 @@ function Home() {
       <button className="create-code-btn" onClick={() => navigate('/codigo')}>Criar Código de Acesso</button>
       <div className="arrow"></div>
 
-      {/* CARD DA CÂMERA (MODO FOTO) */}
+      {/* CARD DA CÂMERA */}
       <div className="camera-card">
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
@@ -109,13 +109,12 @@ function Home() {
             </button>
           ) : (
             <img 
-              // ✅ URL do modo foto com timestamp para atualizar automaticamente
-              src={`http://${ipCamera}/capture?t=${Date.now()}`} 
+              src={`http://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               onError={() => {
-                alert("Não foi possível carregar a foto. Verifique se o celular está na mesma rede Wi-Fi (M6) que a câmera e se o IP está correto.");
+                alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera.");
                 setMostrarCamera(false);
               }}
             />
