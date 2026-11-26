@@ -108,13 +108,14 @@ function Home() {
               Mostrar Câmera
             </button>
           ) : (
-            <img 
-              // ✅ URL do stream MJPEG na porta 81
+            // 🆕 Usando iframe em vez de img para o stream funcionar no Android
+            <iframe 
               src={`http://${ipCamera}/stream`} 
-              alt="Câmera ao Vivo" 
               className="camera-image"
+              style={{ width: '100%', height: '100%', border: 'none', objectFit: 'cover' }}
+              title="Câmera ao Vivo"
               onError={() => {
-                alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera e se nenhuma outra aba está aberta com o stream.");
+                alert("Não foi possível carregar o vídeo. Verifique se o celular está na rede Wi-Fi (M6) e se o IP está correto.");
                 setMostrarCamera(false);
               }}
             />

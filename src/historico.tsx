@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ref, onValue } from 'firebase/database'
-import { db } from './firebase'          // ← CORRIGIDO: db (não database)
+import { db } from './firebase'
 import './historico.css'
 
 interface HistoricoItem {
@@ -10,6 +10,7 @@ interface HistoricoItem {
   usuario: string
   dataHora: string
   codigo: string
+  timestamp: number // 🆕 Adicionado para ordenar corretamente
 }
 
 export default function Historico() {
@@ -29,10 +30,13 @@ export default function Historico() {
           evento: valor.evento || 'DESCONHECIDO',
           usuario: valor.usuario || 'Desconhecido',
           dataHora: valor.dataHora || '-',
-          codigo: valor.codigo || '-'
+          codigo: valor.codigo || '-',
+          timestamp: valor.timestamp || 0 // 🆕 Pega o timestamp salvo pelo ESP32
         }))
 
-        lista.sort((a, b) => b.id.localeCompare(a.id))
+        // 🔑 ORDENA PELO TIMESTAMP (O mais recente fica no topo)
+        lista.sort((a, b) => b.timestamp - a.timestamp)
+        
         setAccessList(lista)
       } else {
         setAccessList([])
@@ -46,7 +50,6 @@ export default function Historico() {
 
   return (
     <div className="history-container">
-
       <div className="bg-circle top-left"></div>
       <div className="bg-circle top-right"></div>
       <div className="bg-circle bottom-right"></div>
@@ -60,7 +63,6 @@ export default function Historico() {
       <h1 className="main-title">Histórico de Acesso</h1>
 
       <div className="access-list">
-
         {carregando && (
           <p style={{ textAlign: 'center', color: '#888' }}>
             Carregando...
@@ -78,7 +80,6 @@ export default function Historico() {
             className={`access-card ${item.evento === 'ABERTA' ? 'aberta' : 'trancada'}`}
             key={item.id}
           >
-
             <div className="clock-icon">
               {item.evento === 'ABERTA' ? '🔓' : '🔒'}
             </div>
@@ -100,10 +101,8 @@ export default function Historico() {
                 Por: {item.usuario}
               </p>
             </div>
-
           </div>
         ))}
-
       </div>
     </div>
   )
