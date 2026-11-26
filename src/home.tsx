@@ -11,8 +11,8 @@ function Home() {
   const [senha, setSenha] = useState<any[]>([])
   const [carregando, setCarregando] = useState(true)
 
-  // IP com a porta 81 para o stream de vídeo
-  const ipCamera = '10.214.94.174:81' 
+  // ✅ Link do Ngrok (sem https e sem a porta, pois o Ngrok já redireciona)
+  const ipCamera = 'jubilant-crablike-kinfolk.ngrok-free.dev' 
 
   // ============ BUSCAR SENHAS FILTRADAS PELO GRUPO ============
   useEffect(() => {
@@ -96,7 +96,7 @@ function Home() {
       <button className="create-code-btn" onClick={() => navigate('/codigo')}>Criar Código de Acesso</button>
       <div className="arrow"></div>
 
-      {/* CARD DA CÂMERA */}
+      {/* CARD DA CÂMERA (VIA NGROK) */}
       <div className="camera-card">
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
@@ -109,12 +109,13 @@ function Home() {
             </button>
           ) : (
             <img 
-              src={`http://${ipCamera}/stream`} 
+              // ✅ URL usando https + Ngrok
+              src={`https://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               onError={() => {
-                alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera.");
+                alert("Não foi possível carregar o vídeo. Verifique se o terminal do Ngrok ainda está aberto e se clicou em 'Start Stream' na página da câmera.");
                 setMostrarCamera(false);
               }}
             />
