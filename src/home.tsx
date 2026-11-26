@@ -11,7 +11,7 @@ function Home() {
   const [senha, setSenha] = useState<any[]>([])
   const [carregando, setCarregando] = useState(true)
 
-  // IP com a porta 81 para o stream de vídeo
+  // ✅ IP com a porta 81 para o stream de vídeo
   const ipCamera = '10.214.94.174:81' 
 
   // ============ BUSCAR SENHAS FILTRADAS PELO GRUPO ============
@@ -96,7 +96,7 @@ function Home() {
       <button className="create-code-btn" onClick={() => navigate('/codigo')}>Criar Código de Acesso</button>
       <div className="arrow"></div>
 
-      {/* CARD DA CÂMERA */}
+      {/* CARD DA CÂMERA (VÍDEO CONTÍNUO) */}
       <div className="camera-card">
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
@@ -109,12 +109,12 @@ function Home() {
             </button>
           ) : (
             <img 
+              // ✅ URL do stream MJPEG na porta 81
               src={`http://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               onError={() => {
-                alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera.");
+                alert("Não foi possível carregar o vídeo. Verifique se você clicou em 'Start Stream' na página da câmera e se nenhuma outra aba está aberta com o stream.");
                 setMostrarCamera(false);
               }}
             />
