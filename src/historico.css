@@ -1,12 +1,23 @@
 /* =========================
    RESET
 ========================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+=======
+html {
+  scroll-behavior: smooth;
+}
+
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
 body {
   font-family: "Inter", Arial, sans-serif;
   background: #eef8ff;
@@ -34,22 +45,49 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+<<<<<<< HEAD
 .top-left {
   width: 350px; height: 350px; top: -180px; left: -180px;
+=======
+
+.top-left {
+  width: 350px;
+  height: 350px;
+  top: -180px;
+  left: -180px;
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
   background: radial-gradient(circle, rgba(31, 133, 0, 0.16), transparent 70%);
 }
 .top-right {
+<<<<<<< HEAD
   width: 220px; height: 220px; top: -110px; right: -110px;
+=======
+  width: 220px;
+  height: 220px;
+  top: -110px;
+  right: -110px;
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
   background: radial-gradient(circle, rgba(0, 140, 255, 0.12), transparent 70%);
 }
 .bottom-right {
+<<<<<<< HEAD
   width: 320px; height: 320px; bottom: -180px; right: -180px;
+=======
+  width: 320px;
+  height: 320px;
+  bottom: -180px;
+  right: -180px;
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
   background: radial-gradient(circle, rgba(31, 133, 0, 0.14), transparent 70%);
 }
 
 /* =========================
    HEADER
 ========================= */
+<<<<<<< HEAD
+=======
+
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
 .history-header {
   width: 100%;
   max-width: 700px;
@@ -172,7 +210,27 @@ body {
    RESPONSIVO
 ========================= */
 @media (max-width: 600px) {
+<<<<<<< HEAD
   .history-container { padding: 20px 16px 32px; }
   .main-title { font-size: 24px; }
   .access-card { padding: 20px 18px; }
 }
+=======
+  .history-container {
+    padding: 20px 16px 32px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin: 8px auto 20px;
+  }
+
+  .access-card {
+    padding: 20px 18px;
+  }
+
+  .photo-card {
+    padding: 20px 16px;
+  }
+}
+>>>>>>> d214b2c164d1f3567fc31ab54d355293080bca05
