@@ -96,7 +96,7 @@ function Home() {
       <button className="create-code-btn" onClick={() => navigate('/codigo')}>Criar Código de Acesso</button>
       <div className="arrow"></div>
 
-      {/* CARD DA CÂMERA (VIA NGROK) */}
+      {/* CARD DA CÂMERA (MODO VÍDEO) */}
       <div className="camera-card">
         <div className="camera-header">
           <span>Câmera ao Vivo</span>
@@ -109,13 +109,13 @@ function Home() {
             </button>
           ) : (
             <img 
-              // ✅ URL usando https + Ngrok
+              // ✅ URL usando https + Ngrok + /stream (Vídeo)
               src={`https://${ipCamera}/stream`} 
               alt="Câmera ao Vivo" 
               className="camera-image"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               onError={() => {
-                alert("Não foi possível carregar o vídeo. Verifique se o terminal do Ngrok ainda está aberto e se clicou em 'Start Stream' na página da câmera.");
+                alert("Não foi possível carregar o vídeo. Verifique se o terminal do Ngrok está aberto, se você já clicou em 'Visit Site' no Ngrok e se clicou em 'Start Stream' na página da câmera.");
                 setMostrarCamera(false);
               }}
             />
